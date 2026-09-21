@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Split Bill Camera</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Arial,sans-serif}
+*{box-sizing:border-box}
+html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+body{color:#fff;-webkit-user-select:none;user-select:none}
+#video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#050505}
+#fallbackCamera{position:absolute;inset:0;background:#000;display:none;align-items:center;justify-content:center;text-align:center;padding:40px}
+#fallbackCamera .card{max-width:320px;color:#fff}
+#fallbackCamera button{margin-top:16px;border:0;border-radius:18px;padding:13px 18px;font-weight:700}
+.layer{position:absolute;inset:0;pointer-events:none}
+.topbar{position:absolute;top:calc(env(safe-area-inset-top) + 10px);left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 28px;z-index:4}
+.control-group{display:flex;gap:9px;align-items:center}
+.control{height:38px;min-width:38px;border:0;border-radius:21px;background:rgba(25,25,25,.70);color:#fff;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:0 11px}
+.control svg{width:20px;height:20px}
+.control.text{font-size:12px;color:#ddd;font-weight:500}
+#detectedTop{display:none;position:absolute;top:calc(env(safe-area-inset-top) + 72px);left:50%;transform:translateX(-50%);height:58px;background:rgba(26,26,28,.94);border-radius:29px;box-shadow:0 7px 28px rgba(0,0,0,.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);align-items:center;white-space:nowrap;overflow:hidden;z-index:6}
+#detectedTop.show{display:flex}
+.liveText{height:100%;padding:0 20px;display:flex;align-items:center;font-size:15px;font-weight:500}
+.sep{height:30px;width:1px;background:#555}
+.look{height:100%;padding:0 17px;display:flex;align-items:center;font-size:15px}
+.chev{width:48px;height:48px;margin-right:5px;border-radius:50%;background:#46464a;display:grid;place-items:center}
+.chev svg{width:24px;height:24px}
+#detectedTools{display:none;position:absolute;top:calc(env(safe-area-inset-top) + 13px);right:26px;gap:7px;z-index:7}
+#detectedTools.show{display:flex}
+#billCard{display:none;position:absolute;left:18%;right:18%;top:20%;bottom:31%;border:1px solid rgba(255,255,255,.25);border-radius:5px;box-shadow:0 0 0 9999px rgba(0,0,0,0);z-index:2}
+#billCard.show{display:block}
+#scanLine{position:absolute;left:8%;right:8%;top:50%;height:1.5px;background:#5de12e;box-shadow:0 0 8px #5de12e;opacity:.8}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:0 28px calc(env(safe-area-inset-bottom) + 24px);z-index:5}
+.actionRow{height:64px;display:flex;align-items:center;justify-content:center;position:relative}
+.side{position:absolute;bottom:4px;width:58px;height:58px;border:0;border-radius:50%;background:rgba(20,20,20,.78);color:#fff;display:grid;place-items:center;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+.side.left{left:0}.side.right{right:0}
+.side svg{width:29px;height:29px}
+.shutter{width:74px;height:74px;border-radius:50%;background:#929292;border:6px solid rgba(0,0,0,.65);box-shadow:0 0 0 2px rgba(255,255,255,.20)}
+.modes{height:54px;display:flex;justify-content:center;align-items:center;margin-top:14px}
+.modebar{height:48px;border-radius:25px;background:rgba(12,12,12,.72);padding:0 9px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.mode{padding:8px 18px;border-radius:21px;color:#9a9a9f;font-size:18px;letter-spacing:.2px}
+.mode.active{color:#d8c74a;background:rgba(48,48,48,.72)}
+#splitButton{display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 132px);height:58px;border:0;border-radius:29px;background:#fff;color:#111;padding:0 21px 0 14px;box-shadow:0 10px 35px rgba(0,0,0,.4);align-items:center;gap:9px;font-size:16px;font-weight:600;z-index:8}
+#splitButton.show{display:flex}
+.splitIcon{width:35px;height:35px;border-radius:10px;background:#151515;color:#fff;display:grid;place-items:center}
+#status{position:absolute;top:calc(env(safe-area-inset-top) + 15px);left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:16px;background:rgba(0,0,0,.55);font-size:11px;opacity:0;transition:.2s;z-index:20}
+#status.show{opacity:1}
+#permission{position:absolute;inset:0;background:#000;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:30}
+#permission.show{display:flex}
+#permission button{margin-top:16px;border:0;border-radius:16px;padding:13px 18px;font-weight:700}
+</style>
+</head>
+<body>
+<div id="app">
+<video id="video" autoplay playsinline muted></video>
+
+<div id="permission">
+  <div>
+    <div style="font-size:21px;font-weight:700">Camera access</div>
+    <div style="margin-top:8px;color:#aaa;font-size:14px;line-height:1.4">Allow camera access to scan your bill.</div>
+    <button id="enable">Enable Camera</button>
+  </div>
+</div>
+
+<div class="layer">
+  <div class="topbar">
+    <div class="control-group">
+      <button class="control" aria-label="flash">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M13 2 4 13h7l-1 9 9-12h-7l1-8Z"/></svg>
+      </button>
+      <button class="control text">HEIF</button>
+      <button class="control text">24</button>
+    </div>
+    <div class="control-group">
+      <button class="control"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7"><path d="M4 8V5h3M20 8V5h-3M4 16v3h3M20 16v3h-3"/><circle cx="12" cy="12" r="3"/></svg></button>
+      <button class="control"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></button>
+    </div>
+  </div>
+
+  <div id="detectedTop">
+    <div class="liveText">Copy</div><div class="sep"></div>
+    <div class="liveText">Select All</div><div class="sep"></div>
+    <div class="liveText">⌘</div><div class="sep"></div>
+    <div class="look">Look Up</div>
+    <div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="m9 5 7 7-7 7"/></svg></div>
+  </div>
+
+  <div id="detectedTools">
+    <button class="control">☾</button><button class="control">ϟ</button><button class="control">◉</button><button class="control">•••</button>
+  </div>
+
+  <div id="billCard"><div id="scanLine"></div></div>
+
+  <div id="splitButton">
+    <span class="splitIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 8h8M8 12h5M8 16h3"/></svg>
+    </span>
+    Split bill
+    <span style="font-size:24px;line-height:1;margin-left:4px">×</span>
+  </div>
+
+  <div class="bottom">
+    <div class="actionRow">
+      <button class="side left" aria-label="photos"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-5 3 3 2-2 4 4"/></svg></button>
+      <div class="shutter"></div>
+      <button class="side right" aria-label="camera switch"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7"><path d="M7 7h10l-2-2M17 17H7l2 2"/><path d="M17 7a6 6 0 0 1 1.5 5M7 17a6 6 0 0 1-1.5-5"/></svg></button>
+    </div>
+    <div class="modes"><div class="modebar"><div class="mode">VIDEO</div><div class="mode active">PHOTO</div></div></div>
+  </div>
+</div>
+
+<div id="status"></div>
+<script>
+const video=document.getElementById('video');
+const permission=document.getElementById('permission');
+const enable=document.getElementById('enable');
+const status=document.getElementById('status');
+const detectedTop=document.getElementById('detectedTop');
+const detectedTools=document.getElementById('detectedTools');
+const splitButton=document.getElementById('splitButton');
+const billCard=document.getElementById('billCard');
+let stream=null;
+
+function toast(t){status.textContent=t;status.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>status.classList.remove('show'),1800)}
+
+async function startCamera(){
+  if(!window.isSecureContext && location.hostname!=='localhost' && location.hostname!=='127.0.0.1'){
+    permission.classList.add('show');
+    toast('Open this page using HTTPS');
+    return;
+  }
+  if(!navigator.mediaDevices?.getUserMedia){
+    permission.classList.add('show'); return;
+  }
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({
+      audio:false,
+      video:{facingMode:{exact:'environment'},width:{ideal:1920},height:{ideal:1080}}
+    });
+    video.srcObject=stream;
+    await video.play();
+    toast('Camera ready');
+  }catch(e){
+    try{
+      stream=await navigator.mediaDevices.getUserMedia({audio:false,video:true});
+      video.srcObject=stream; await video.play();
+    }catch(err){
+      permission.classList.add('show');
+      toast('Camera permission denied');
+    }
+  }
+}
+
+function showDetected(){
+  detectedTop.classList.add('show');
+  detectedTools.classList.add('show');
+  billCard.classList.add('show');
+  splitButton.classList.add('show');
+  document.getElementById('scanLine').style.display='none';
+  toast('Bill detected');
+}
+
+enable.onclick=()=>{permission.classList.remove('show');startCamera()};
+splitButton.onclick=()=>toast('Screen 2 will be added next');
+
+// Temporary testing: triple tap anywhere in the camera area.
+let taps=0,timer;
+document.getElementById('app').addEventListener('click',e=>{
+  if(e.target.closest('#splitButton')||e.target.closest('#permission'))return;
+  taps++; clearTimeout(timer); timer=setTimeout(()=>taps=0,650);
+  if(taps===3){taps=0;showDetected()}
+});
+
+startCamera();
+</script>
+</body>
+</html>
