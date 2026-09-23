@@ -107,7 +107,7 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
     <div class="actionRow">
       <button class="side left" aria-label="photos"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-5 3 3 2-2 4 4"/></svg></button>
       <div class="shutter"></div>
-      <button class="side right" aria-label="camera switch"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7"><path d="M7 7h10l-2-2M17 17H7l2 2"/><path d="M17 7a6 6 0 0 1 1.5 5M7 17a6 6 0 0 1-1.5-5"/></svg></button>
+      <button id="flipCamera" class="side right" aria-label="Flip camera"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"/><path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3"/></svg></button>
     </div>
     <div class="modes"><div class="modebar"><div class="mode">VIDEO</div><div class="mode active">PHOTO</div></div></div>
   </div>
@@ -123,7 +123,16 @@ const detectedTop=document.getElementById('detectedTop');
 const detectedTools=document.getElementById('detectedTools');
 const splitButton=document.getElementById('splitButton');
 const billCard=document.getElementById('billCard');
+const flipCamera=document.getElementById('flipCamera');
 let stream=null;
+let facingMode='environment';
+let scanTimer=null;
+let scanInProgress=false;
+let receiptFound=false;
+let scanAttempts=0;
+
+const receiptTerms=/\b(total|subtotal|grand\s*total|amount\s*due|balance\s*due|tax|vat|gst|cash|change|receipt|invoice|bill)\b/i;
+const moneyAmount=/(?:₹|rs\.?|inr|\$|€|£)?\s*\d{1,6}(?:[,.]\d{2})\b/gi;
 
 function toast(t){status.textContent=t;status.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>status.classList.remove('show'),1800)}
 
@@ -139,20 +148,66 @@ async function startCamera(){
   try{
     stream=await navigator.mediaDevices.getUserMedia({
       audio:false,
-      video:{facingMode:{exact:'environment'},width:{ideal:1920},height:{ideal:1080}}
+      video:{facingMode:{exact:facingMode},width:{ideal:1920},height:{ideal:1080}}
     });
     video.srcObject=stream;
     await video.play();
     toast('Camera ready');
+    startReceiptDetection();
   }catch(e){
     try{
       stream=await navigator.mediaDevices.getUserMedia({audio:false,video:true});
       video.srcObject=stream; await video.play();
+      startReceiptDetection();
     }catch(err){
       permission.classList.add('show');
       toast('Camera permission denied');
     }
   }
+}
+
+function stopReceiptDetection(){
+  clearInterval(scanTimer);
+  scanTimer=null;
+}
+
+function isReceiptText(text){
+  const amounts=(text.match(moneyAmount)||[]).length;
+  const hasReceiptTerm=receiptTerms.test(text);
+  const lines=text.split(/\n+/).filter(line=>line.trim().length>2).length;
+  return (hasReceiptTerm&&amounts>=1)||(amounts>=3&&lines>=4);
+}
+
+async function scanForReceipt(){
+  if(receiptFound||scanInProgress||video.readyState<video.HAVE_CURRENT_DATA||!window.Tesseract)return;
+  scanInProgress=true;
+  try{
+    const scale=Math.min(1,960/video.videoWidth);
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(video.videoWidth*scale));
+    canvas.height=Math.max(1,Math.round(video.videoHeight*scale));
+    canvas.getContext('2d',{willReadFrequently:true}).drawImage(video,0,0,canvas.width,canvas.height);
+    const result=await Tesseract.recognize(canvas,'eng',{logger:()=>{}});
+    scanAttempts++;
+    if(isReceiptText(result.data.text)){
+      receiptFound=true;
+      stopReceiptDetection();
+      showDetected();
+    }
+  }catch(error){
+    // Keep camera scanning available if OCR is temporarily unavailable.
+  }finally{
+    scanInProgress=false;
+    if(scanAttempts>=20)stopReceiptDetection();
+  }
+}
+
+function startReceiptDetection(){
+  stopReceiptDetection();
+  receiptFound=false;
+  scanAttempts=0;
+  scanForReceipt();
+  scanTimer=setInterval(scanForReceipt,2500);
 }
 
 function showDetected(){
@@ -167,7 +222,14 @@ function showDetected(){
 enable.onclick=()=>{permission.classList.remove('show');startCamera()};
 splitButton.onclick=()=>toast('Screen 2 will be added next');
 
-// Temporary testing: triple tap anywhere in the camera area.
+flipCamera.onclick=async()=>{
+  facingMode=facingMode==='environment'?'user':'environment';
+  stopReceiptDetection();
+  stream?.getTracks().forEach(track=>track.stop());
+  await startCamera();
+};
+
+// Manual fallback for devices where OCR is unavailable.
 let taps=0,timer;
 document.getElementById('app').addEventListener('click',e=>{
   if(e.target.closest('#splitButton')||e.target.closest('#permission'))return;
