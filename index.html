@@ -47,8 +47,7 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 #splitButton{display:none;position:absolute;top:69%;left:50%;width:min(26.76vw,114px);min-width:100px;height:29px;transform:translate(-50%,12px) scale(.78);border:0;border-radius:28px;background:#fff;color:#04060d;padding:6px 10px;box-shadow:0 6px 22px rgba(0,0,0,.24);align-items:center;justify-content:center;gap:8px;font-family:"SF Pro Text","SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:400;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;-webkit-tap-highlight-color:transparent;will-change:transform,opacity}
 #splitButton.show{display:flex;animation:splitBillAppear 620ms cubic-bezier(.18,1.35,.36,1) forwards}
 #splitButton:active{transform:translate(-50%,0) scale(.93);filter:brightness(.94)}
-.splitIcon{width:14px;height:14px;flex:0 0 14px;border-radius:2px;background:#0a1020;color:#fff;display:grid;place-items:center;overflow:hidden}
-.splitIcon svg{width:10.5px;height:8px}
+.splitIcon{width:14px;height:14px;flex:0 0 14px;display:block}
 .splitLabel{white-space:nowrap}
 .splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#000;font-size:16px;font-weight:400;line-height:1}
 @keyframes splitBillAppear{0%{opacity:0;transform:translate(-50%,12px) scale(.78)}65%{opacity:1;transform:translate(-50%,-1px) scale(1.04)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
@@ -58,6 +57,18 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 #permission{position:absolute;inset:0;background:#000;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:30}
 #permission.show{display:flex}
 #permission button{margin-top:16px;border:0;border-radius:16px;padding:13px 18px;font-weight:700}
+#billScreen{display:none;position:absolute;inset:0;overflow:hidden;color:#fff;background:#080808;z-index:40;font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,sans-serif}
+.show-bill #video,.show-bill .layer,.show-bill #status{display:none}
+.show-bill #billScreen{display:block}
+.billBackdrop{position:absolute;inset:-26px;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.5) 40%,rgba(77,18,213,.72) 100%),url("assets/home-screen.png") center/cover;filter:blur(15px) saturate(.8);transform:scale(1.08)}
+.billGlow{position:absolute;inset:0;background:radial-gradient(ellipse 72% 42% at 54% 76%,rgba(206,145,255,.6),transparent 72%),linear-gradient(180deg,rgba(0,0,0,.08),rgba(30,0,92,.34) 100%)}
+.billPanel{position:absolute;top:var(--bill-panel-top,93.5px);left:50%;width:346px;height:584px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;padding:10px;border-radius:40px;background:#101010;box-shadow:0 24px 55px rgba(0,0,0,.5);overflow:hidden}
+.billHero{position:relative;height:202px;border-radius:34px 34px 40px 40px;background:#298700 url("assets/bill-green.png") center/cover;overflow:hidden;text-align:center}
+.billProgress{position:absolute;top:18px;left:50%;width:104px;transform:translateX(-50%);display:flex;gap:6px}.billProgress span{height:8px;flex:1;border-radius:999px;background:rgba(255,255,255,.35)}.billProgress span:first-child{background:#fff}
+.billEyebrow{margin:0;padding-top:74px;font-size:15px;font-weight:700;letter-spacing:2px}.billAmount{margin-top:9px;font-size:clamp(48px,15.5vw,63px);font-weight:700;line-height:.92;letter-spacing:-2.2px}.billMeta{margin-top:18px;color:rgba(255,255,255,.85);font-size:13px;font-weight:500;letter-spacing:1.65px;white-space:nowrap}.billCount{display:inline-flex;align-items:center;justify-content:center;height:31px;margin-top:17px;padding:0 16px;border:1px solid rgba(255,255,255,.45);border-radius:20px;background:rgba(255,255,255,.12);font-size:13px}
+.billDetails{padding:18px 8px 0}.billTax{margin:0 0 16px;color:#a6a6a8;text-align:center;font-size:12px;line-height:15px;white-space:nowrap}.billRows{display:grid;gap:12px}.billRow{height:48px;display:flex;align-items:center;gap:12px;padding:6px 16px;border:1px solid rgba(255,255,255,.32);border-radius:25px;background:rgba(39,39,39,.96);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.foodThumb{width:38px;height:36px;flex:0 0 38px;background-image:url("assets/food-sprite.png");background-repeat:no-repeat;background-size:152px 83px}.food-masala{background-position:0 0}.food-podi{background-position:-53px 0}.food-idli{background-position:-102px 0}.food-parotta{background-position:-53px -39px}.food-coffee{background-position:-114px -39px}.billItemName{min-width:0;flex:1;font-size:17px;font-weight:400;white-space:nowrap}.billQuantity{font-size:16px}.billPrice{font-size:18px;font-weight:700;white-space:nowrap}.billHint{margin:13px 0 0;color:#a6a6a8;text-align:center;font-size:12px;line-height:15px}
+.friendsButton{position:absolute;top:var(--friends-top,733px);left:50%;width:243px;height:52px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;border:0;border-radius:28px;background:#fff;color:#07070a;display:flex;align-items:center;justify-content:center;gap:10px;font:600 17px/19px "SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.23);-webkit-tap-highlight-color:transparent}.friendsButton:active{transform:translateX(-50%) scale(calc(var(--bill-scale,1) * .96))}.friendsPlus{width:24px;height:24px;display:grid;place-items:center;border:2px solid #08080a;border-radius:50%;font-size:24px;font-weight:400;line-height:18px}
 </style>
 </head>
 <body>
@@ -103,7 +114,7 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 
   <button id="splitButton" aria-label="Split bill">
     <span class="splitIcon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 8h8M8 12h5M8 16h3"/></svg>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="14" rx="2" fill="#0A1020"/><path d="M12.5 4.08333C12.5 3.76117 12.2388 3.5 11.9167 3.5H6.66667C6.34449 3.5 6.08333 3.76117 6.08333 4.08333C6.08333 4.4055 6.34449 4.66667 6.66667 4.66667H11.9167C12.2388 4.66667 12.5 4.4055 12.5 4.08333ZM4.91667 4.08333C4.91667 3.76117 4.6555 3.5 4.33333 3.5H2.58333C2.26117 3.5 2 3.76117 2 4.08333C2 4.4055 2.26117 4.66667 2.58333 4.66667H4.33333C4.6555 4.66667 4.91667 4.4055 4.91667 4.08333ZM12.5 7.41667C12.5 7.0945 12.2388 6.83333 11.9167 6.83333H6.66667C6.34449 6.83333 6.08333 7.0945 6.08333 7.41667C6.08333 7.73884 6.34449 8 6.66667 8H11.9167C12.2388 8 12.5 7.73884 12.5 7.41667ZM4.91667 7.41667C4.91667 7.0945 4.6555 6.83333 4.33333 6.83333H2.58333C2.26117 6.83333 2 7.0945 2 7.41667C2 7.73884 2.26117 8 2.58333 8H4.33333C4.6555 8 4.91667 7.73884 4.91667 7.41667ZM12.5 10.75C12.5 10.4278 12.2388 10.1667 11.9167 10.1667H6.66667C6.34449 10.1667 6.08333 10.4278 6.08333 10.75C6.08333 11.0722 6.34449 11.3333 6.66667 11.3333H11.9167C12.2388 11.3333 12.5 11.0722 12.5 10.75ZM4.91667 10.75C4.91667 10.4278 4.6555 10.1667 4.33333 10.1667H2.58333C2.26117 10.1667 2 10.4278 2 10.75C2 11.0722 2.26117 11.3333 2.58333 11.3333H4.33333C4.6555 11.3333 4.91667 11.0722 4.91667 10.75Z" fill="white"/></svg>
     </span>
     <span class="splitLabel">Split bill</span>
     <span class="splitDismiss" aria-hidden="true">×</span>
@@ -118,6 +129,31 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
     <div class="modes"><div class="modebar"><div class="mode">VIDEO</div><div class="mode active">PHOTO</div></div></div>
   </div>
 </div>
+
+<section id="billScreen" aria-label="Split Bill summary">
+  <div class="billBackdrop"></div><div class="billGlow"></div>
+  <article class="billPanel">
+    <header class="billHero">
+      <div class="billProgress"><span></span><span></span><span></span></div>
+      <p class="billEyebrow">SPLIT BILL</p>
+      <div class="billAmount">₹451.50</div>
+      <div class="billMeta">SRI KAVERI MESS · 25 OCT 2026</div>
+      <div class="billCount">5 items found</div>
+    </header>
+    <div class="billDetails">
+      <p class="billTax">GST 5% ₹21.50 &nbsp; · &nbsp; Subtotal ₹430</p>
+      <div class="billRows">
+        <div class="billRow"><span class="foodThumb food-masala" aria-hidden="true"></span><span class="billItemName">Masala Dosa</span><strong class="billPrice">₹110</strong></div>
+        <div class="billRow"><span class="foodThumb food-podi" aria-hidden="true"></span><span class="billItemName">Podi Dosa</span><strong class="billPrice">₹95</strong></div>
+        <div class="billRow"><span class="foodThumb food-idli" aria-hidden="true"></span><span class="billItemName">Idli,</span><strong class="billPrice">₹60</strong></div>
+        <div class="billRow"><span class="foodThumb food-parotta" aria-hidden="true"></span><span class="billItemName">Parotta</span><strong class="billPrice">₹60</strong></div>
+        <div class="billRow"><span class="foodThumb food-coffee" aria-hidden="true"></span><span class="billItemName">Filter Coffee</span><span class="billQuantity">×3</span><strong class="billPrice">₹105</strong></div>
+      </div>
+      <p class="billHint">Tap items to edit</p>
+    </div>
+  </article>
+  <button class="friendsButton" type="button"><span class="friendsPlus">+</span>Add Friends to split</button>
+</section>
 
 <div id="status"></div>
 <script>
@@ -139,6 +175,13 @@ let scanAttempts=0;
 
 const receiptTerms=/\b(total|subtotal|grand\s*total|amount\s*due|balance\s*due|tax|vat|gst|cash|change|receipt|invoice|bill)\b/i;
 const moneyAmount=/(?:₹|rs\.?|inr|\$|€|£)?\s*\d{1,6}(?:[,.]\d{2})\b/gi;
+
+function syncBillScale(){
+  const scale=Math.min(1,window.innerWidth/393,window.innerHeight/852);
+  document.documentElement.style.setProperty('--bill-scale',String(scale));
+  document.documentElement.style.setProperty('--bill-panel-top',`${93.5*scale}px`);
+  document.documentElement.style.setProperty('--friends-top',`${733*scale}px`);
+}
 
 function toast(t){status.textContent=t;status.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>status.classList.remove('show'),1800)}
 
@@ -226,7 +269,10 @@ function showDetected(){
 }
 
 enable.onclick=()=>{permission.classList.remove('show');startCamera()};
-splitButton.onclick=()=>toast('Screen 2 will be added next');
+splitButton.onclick=()=>{
+  stopReceiptDetection();
+  document.body.classList.add('show-bill');
+};
 
 flipCamera.onclick=async()=>{
   facingMode=facingMode==='environment'?'user':'environment';
@@ -243,6 +289,8 @@ document.getElementById('app').addEventListener('click',e=>{
   if(taps===3){taps=0;showDetected()}
 });
 
+syncBillScale();
+window.addEventListener('resize',syncBillScale,{passive:true});
 startCamera();
 </script>
 </body>
