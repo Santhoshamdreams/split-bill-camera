@@ -68,10 +68,11 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .billPanel{position:absolute;top:var(--bill-panel-top,93.5px);left:50%;width:346px;height:584px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;padding:10px;border-radius:40px;background:#101010;box-shadow:0 24px 55px rgba(0,0,0,.5);overflow:hidden}
 .billHero{position:relative;height:202px;border-radius:34px 34px 40px 40px;background:#298700 url("assets/bill-green.png") center/cover;overflow:hidden;text-align:center}
 .billProgress{position:absolute;top:18px;left:50%;width:104px;transform:translateX(-50%);display:flex;gap:6px}.billProgress span{height:8px;flex:1;border-radius:999px;background:rgba(255,255,255,.35)}.billProgress span:first-child{background:#fff}
-.billEyebrow{margin:0;padding-top:28px;font-size:15px;font-weight:600;letter-spacing:2px}.billAmount{margin-top:9px;font-size:clamp(48px,15.5vw,63px);font-weight:400;line-height:.92;letter-spacing:-2.2px}.billMeta{margin-top:12px;color:rgba(255,255,255,.85);font-size:13px;font-weight:500;letter-spacing:1.65px;white-space:nowrap}.billCount{display:inline-flex;align-items:center;justify-content:center;height:31px;margin-top:13px;padding:0 16px;border:1px solid rgba(255,255,255,.44);border-radius:24px;background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(0,0,0,.12);backdrop-filter:blur(4px) saturate(1.25);-webkit-backdrop-filter:blur(4px) saturate(1.25);font-size:13px}
+.billEyebrow{margin:0;padding-top:36px;font-size:15px;font-weight:600;letter-spacing:2px}.billAmount{margin-top:9px;font-size:clamp(48px,15.5vw,63px);font-weight:400;line-height:.92;letter-spacing:-2.2px}.billMeta{margin-top:12px;color:rgba(255,255,255,.85);font-size:13px;font-weight:500;letter-spacing:1.65px;white-space:nowrap}.billCount{display:inline-flex;align-items:center;justify-content:center;height:31px;margin-top:13px;padding:0 16px;border:1px solid rgba(255,255,255,.44);border-radius:24px;background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(0,0,0,.12);backdrop-filter:blur(4px) saturate(1.25);-webkit-backdrop-filter:blur(4px) saturate(1.25);font-size:13px}
 .billDetails{padding:18px 8px 0}.billTax{margin:0 0 16px;color:#a6a6a8;text-align:center;font-size:12px;line-height:15px;white-space:nowrap}.billRows{display:grid;gap:12px}.billRow{height:48px;display:flex;align-items:center;gap:12px;padding:6px 16px;border:0;border-radius:20px;background:rgba(255,255,255,.10);box-shadow:inset 0 1px 1px rgba(255,255,255,.08),inset 0 -12px 22px rgba(0,0,0,.05);backdrop-filter:blur(4px) saturate(1.25);-webkit-backdrop-filter:blur(4px) saturate(1.25)}
 .foodThumb{width:38px;height:36px;flex:0 0 38px;object-fit:contain}.billItemName{min-width:0;flex:1;font-size:17px;font-weight:400;white-space:nowrap}.billQuantity{font-size:16px}.billPrice{font-size:18px;font-weight:600;white-space:nowrap}.billHint{margin:13px 0 0;color:#a6a6a8;text-align:center;font-size:12px;line-height:15px}
-.friendsButton{position:absolute;top:var(--friends-top,733px);left:50%;width:243px;height:52px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;border:0;border-radius:28px;background:#fff;color:#07070a;display:flex;align-items:center;justify-content:center;gap:10px;font:600 17px/19px "Inter",-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:-.24px;box-shadow:0 12px 30px rgba(0,0,0,.23);-webkit-tap-highlight-color:transparent}.friendsButton:active{transform:translateX(-50%) scale(calc(var(--bill-scale,1) * .96))}.friendsPlus{width:24px;height:24px;flex:0 0 24px;display:block}
+.friendsButton{position:absolute;top:var(--friends-top,733px);left:50%;width:243px;height:52px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;border:0;border-radius:28px;background:#fff;color:#07070a;display:flex;align-items:center;justify-content:center;gap:10px;font:600 17px/19px "Inter",-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:-.24px;box-shadow:0 12px 30px rgba(0,0,0,.23);-webkit-tap-highlight-color:transparent}.friendsButton:active,.friendsButton.is-pressed{transform:translateX(-50%) scale(calc(var(--bill-scale,1) * .96))}.friendsPlus{width:24px;height:24px;flex:0 0 24px;display:block}
+#peopleScreen{display:none;position:absolute;inset:0;overflow:hidden;color:#fff;background:#080808;z-index:45;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;will-change:transform,opacity}.show-people #billScreen,.show-people .friendsButton{display:none}.show-people #peopleScreen{display:block}.peoplePanel{position:absolute;top:var(--bill-panel-top,93.5px);left:50%;width:346px;height:584px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;padding:10px;border-radius:40px;background:#101010;box-shadow:0 24px 55px rgba(0,0,0,.5);overflow:hidden}.peopleHero{position:relative;height:150px;border-radius:34px 34px 40px 40px;background:#298700 url("assets/bill-green.png") center/cover;overflow:visible;text-align:center}.peopleProgress{position:absolute;top:18px;left:50%;width:104px;transform:translateX(-50%);display:flex;gap:6px}.peopleProgress span{height:8px;flex:1;border-radius:999px;background:rgba(255,255,255,.35)}.peopleProgress span:nth-child(-n+2){background:#fff}.peopleEyebrow{margin:0;padding-top:36px;font-size:15px;font-weight:600;letter-spacing:2px}.peopleAmount{margin-top:9px;font-size:48px;font-weight:400;line-height:.92;letter-spacing:-2px}.peopleMeta{margin-top:12px;color:rgba(255,255,255,.85);font-size:13px;font-weight:500;letter-spacing:1.65px;white-space:nowrap}.foodStrip{position:absolute;top:126px;left:50%;width:248px;height:62px;transform:translateX(-50%);border-radius:0 0 24px 24px;background:rgba(16,16,16,.86);box-shadow:0 -2px 8px rgba(0,0,0,.46),inset 0 1px 1px rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:8px}.foodStrip img{width:43px;height:43px;object-fit:contain}.peopleContent{padding:54px 8px 0}.peopleSearch{height:38px;border-radius:22px;background:rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;padding:0 15px;color:rgba(255,255,255,.34);font-size:15px}.peopleSearch svg{width:20px;height:20px;flex:0 0 20px}.profiles{display:grid;grid-template-columns:repeat(4,1fr);column-gap:7px;row-gap:18px;margin-top:16px}.profile{border:0;padding:0;background:transparent;color:#fff;font:500 12px/15px "Inter",sans-serif;text-align:center;min-width:0;-webkit-tap-highlight-color:transparent}.profileAvatar{position:relative;width:58px;height:58px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);font-size:22px;font-weight:500;letter-spacing:-1px;transition:background .2s ease,color .2s ease,transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s ease}.profile.selected .profileAvatar{background:#fff;color:#08080a;box-shadow:none}.profile:active .profileAvatar{transform:scale(.92)}.profileCheck{display:none;position:absolute;right:-2px;top:0;width:22px;height:22px;border-radius:50%;background:#3d3d40;place-items:center}.profile.selected .profileCheck{display:grid}.profileCheck svg{width:14px;height:14px}.profileName{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.peopleActions{position:absolute;top:var(--friends-top,733px);left:50%;width:243px;transform:translateX(-50%) scale(var(--bill-scale,1));transform-origin:top center;display:grid;gap:12px}.peopleAction{width:243px;height:52px;border:0;border-radius:28px;font:600 17px/19px "Inter",sans-serif;letter-spacing:-.24px;-webkit-tap-highlight-color:transparent}.peopleAction.primary{background:#fff;color:#07070a;box-shadow:0 12px 30px rgba(0,0,0,.23)}.peopleAction.secondary{color:#fff;background:rgba(255,255,255,.18);box-shadow:inset 0 1px 1px rgba(255,255,255,.25);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}.peopleAction:active{transform:scale(.96)}.splitEach{font-size:13px;font-weight:400;margin-left:7px}
 @keyframes billScreenSlideIn{0%{opacity:.72;transform:translate3d(100%,0,0)}68%{opacity:1;transform:translate3d(-1.2%,0,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes billHeroIn{0%{opacity:0;transform:translateY(18px) scale(.965)}70%{opacity:1;transform:translateY(-1px) scale(1.006)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes billContentIn{0%{opacity:0;transform:translateY(14px);filter:blur(3px)}72%{opacity:1;transform:translateY(-1px);filter:blur(0)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
@@ -79,6 +80,10 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 @keyframes friendsButtonIn{0%{opacity:0;transform:translateX(-50%) translateY(22px) scale(calc(var(--bill-scale,1) * .92))}72%{opacity:1;transform:translateX(-50%) translateY(-1px) scale(calc(var(--bill-scale,1) * 1.015))}100%{opacity:1;transform:translateX(-50%) translateY(0) scale(var(--bill-scale,1))}}
 @keyframes billAmbientDrift{0%{background-position:38% 42%,46% 52%,center;transform:translate3d(-1.5%,-1%,0) scale(1)}100%{background-position:64% 56%,59% 64%,center;transform:translate3d(1.5%,1%,0) scale(1.055)}}
 @keyframes billProgressIn{0%{opacity:0;transform:translateX(-50%) translateY(14px);filter:blur(3px)}72%{opacity:1;transform:translateX(-50%) translateY(-1px);filter:blur(0)}100%{opacity:1;transform:translateX(-50%) translateY(0);filter:blur(0)}}
+@keyframes billSharedOut{to{opacity:0;transform:translateY(-10px) scale(.98)}}
+@keyframes peopleScreenIn{0%{opacity:.65;transform:translate3d(100%,0,0)}72%{opacity:1;transform:translate3d(-1%,0,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes peopleHeroIn{0%{opacity:0;transform:translateY(16px) scale(.97)}72%{opacity:1;transform:translateY(-1px) scale(1.005)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes peopleElementIn{0%{opacity:0;transform:translateY(14px);filter:blur(3px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
 .show-bill.bill-entering #billScreen{animation:billScreenSlideIn 620ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .billHero{animation:billHeroIn 560ms 105ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .billProgress{animation:billProgressIn 380ms 175ms cubic-bezier(.22,1,.36,1) both}
@@ -90,7 +95,9 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .show-bill.bill-entering .billRow{animation:billRowIn 470ms cubic-bezier(.22,1,.36,1) both}.show-bill.bill-entering .billRow:nth-child(1){animation-delay:390ms}.show-bill.bill-entering .billRow:nth-child(2){animation-delay:445ms}.show-bill.bill-entering .billRow:nth-child(3){animation-delay:500ms}.show-bill.bill-entering .billRow:nth-child(4){animation-delay:555ms}.show-bill.bill-entering .billRow:nth-child(5){animation-delay:610ms}
 .show-bill.bill-entering .billHint{animation:billContentIn 420ms 665ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .friendsButton{animation:friendsButtonIn 540ms 710ms cubic-bezier(.22,1,.36,1) both}
-@media (prefers-reduced-motion:reduce){.billGlow{animation:none}.show-bill.bill-entering #billScreen,.show-bill.bill-entering .billHero,.show-bill.bill-entering .billProgress,.show-bill.bill-entering .billEyebrow,.show-bill.bill-entering .billAmount,.show-bill.bill-entering .billMeta,.show-bill.bill-entering .billCount,.show-bill.bill-entering .billTax,.show-bill.bill-entering .billRow,.show-bill.bill-entering .billHint,.show-bill.bill-entering .friendsButton{animation-duration:1ms!important;animation-delay:0ms!important}}
+.billScreenLeaving .billHero,.billScreenLeaving .billDetails{animation:billSharedOut 180ms cubic-bezier(.4,0,1,1) both}.billScreenLeaving .friendsButton{filter:brightness(.94)}
+.show-people.people-entering #peopleScreen{animation:peopleScreenIn 580ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .peopleHero{animation:peopleHeroIn 520ms 55ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .foodStrip{animation:peopleElementIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .peopleSearch{animation:peopleElementIn 400ms 240ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .profile{animation:peopleElementIn 410ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .profile:nth-child(1){animation-delay:285ms}.show-people.people-entering .profile:nth-child(2){animation-delay:325ms}.show-people.people-entering .profile:nth-child(3){animation-delay:365ms}.show-people.people-entering .profile:nth-child(4){animation-delay:405ms}.show-people.people-entering .profile:nth-child(5){animation-delay:445ms}.show-people.people-entering .profile:nth-child(6){animation-delay:485ms}.show-people.people-entering .profile:nth-child(7){animation-delay:525ms}.show-people.people-entering .profile:nth-child(8){animation-delay:565ms}.show-people.people-entering .profile:nth-child(9){animation-delay:605ms}.show-people.people-entering .profile:nth-child(10){animation-delay:645ms}.show-people.people-entering .profile:nth-child(11){animation-delay:685ms}.show-people.people-entering .profile:nth-child(12){animation-delay:725ms}.show-people.people-entering .peopleActions{animation:peopleElementIn 460ms 710ms cubic-bezier(.22,1,.36,1) both}
+@media (prefers-reduced-motion:reduce){.billGlow{animation:none}.show-bill.bill-entering #billScreen,.show-bill.bill-entering .billHero,.show-bill.bill-entering .billProgress,.show-bill.bill-entering .billEyebrow,.show-bill.bill-entering .billAmount,.show-bill.bill-entering .billMeta,.show-bill.bill-entering .billCount,.show-bill.bill-entering .billTax,.show-bill.bill-entering .billRow,.show-bill.bill-entering .billHint,.show-bill.bill-entering .friendsButton,.show-people.people-entering #peopleScreen,.show-people.people-entering .peopleHero,.show-people.people-entering .foodStrip,.show-people.people-entering .peopleSearch,.show-people.people-entering .profile,.show-people.people-entering .peopleActions{animation-duration:1ms!important;animation-delay:0ms!important}}
 </style>
 </head>
 <body>
@@ -177,6 +184,37 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
   <button class="friendsButton" type="button"><svg class="friendsPlus" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8V16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Add Friends to split</button>
 </section>
 
+<section id="peopleScreen" aria-label="Add people to split the bill">
+  <div class="billBackdrop"></div><div class="billGlow"></div>
+  <article class="peoplePanel">
+    <header class="peopleHero">
+      <div class="peopleProgress"><span></span><span></span><span></span></div>
+      <p class="peopleEyebrow">ADD PEOPLE</p>
+      <div class="peopleAmount">₹451.50</div>
+      <div class="peopleMeta">SRI KAVERI MESS · 25 OCT 2026</div>
+      <div class="foodStrip" aria-label="Bill items"><img src="assets/Masala%20dosa.png" alt=""><img src="assets/podei%20dosa.png" alt=""><img src="assets/Idli.png" alt=""><img src="assets/Parotta.png" alt=""><img src="assets/Coffee.png" alt=""></div>
+    </header>
+    <div class="peopleContent">
+      <div class="peopleSearch" aria-label="Search people"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Search People</span></div>
+      <div class="profiles" aria-label="Select people to split with">
+        <button class="profile selected" type="button" aria-pressed="true" data-person="You"><span class="profileAvatar">Y<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">You</span></button>
+        <button class="profile selected" type="button" aria-pressed="true" data-person="Vishnu"><span class="profileAvatar">V<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Vishnu</span></button>
+        <button class="profile selected" type="button" aria-pressed="true" data-person="Gokul"><span class="profileAvatar">G<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Gokul</span></button>
+        <button class="profile selected" type="button" aria-pressed="true" data-person="Sanjay"><span class="profileAvatar">S<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Sanjay</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Mangal"><span class="profileAvatar">M<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Mangal</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Balu"><span class="profileAvatar">B<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Balu</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Praveen"><span class="profileAvatar">PA<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Praveen</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Suriya"><span class="profileAvatar">SU<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Suriya</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Abishek"><span class="profileAvatar">A<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Abishek</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Pooja"><span class="profileAvatar">PB<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Pooja</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Jeeva"><span class="profileAvatar">J<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Jeeva</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Ritish"><span class="profileAvatar">R<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Ritish</span></button>
+      </div>
+    </div>
+  </article>
+  <div class="peopleActions"><button class="peopleAction primary" type="button">Split by item</button><button class="peopleAction secondary" type="button"><span id="splitCount">4</span> Split evenly <span id="splitEach" class="splitEach">₹112.88 each</span></button></div>
+</section>
+
 <div id="status"></div>
 <script>
 const video=document.getElementById('video');
@@ -188,6 +226,10 @@ const detectedTools=document.getElementById('detectedTools');
 const splitButton=document.getElementById('splitButton');
 const billCard=document.getElementById('billCard');
 const flipCamera=document.getElementById('flipCamera');
+const billScreen=document.getElementById('billScreen');
+const friendsButton=document.querySelector('.friendsButton');
+const splitCount=document.getElementById('splitCount');
+const splitEach=document.getElementById('splitEach');
 let stream=null;
 let facingMode='environment';
 let scanTimer=null;
@@ -297,6 +339,27 @@ splitButton.onclick=()=>{
   document.body.classList.add('show-bill');
   requestAnimationFrame(()=>document.body.classList.add('bill-entering'));
 };
+
+friendsButton.onclick=()=>{
+  friendsButton.classList.add('is-pressed');
+  billScreen.classList.add('billScreenLeaving');
+  setTimeout(()=>{
+    document.body.classList.remove('people-entering');
+    document.body.classList.add('show-people');
+    requestAnimationFrame(()=>document.body.classList.add('people-entering'));
+  },170);
+};
+
+document.querySelectorAll('.profile').forEach(profile=>{
+  profile.onclick=()=>{
+    const selected=!profile.classList.contains('selected');
+    profile.classList.toggle('selected',selected);
+    profile.setAttribute('aria-pressed',String(selected));
+    const count=document.querySelectorAll('.profile.selected').length;
+    splitCount.textContent=String(count);
+    splitEach.textContent=count?`₹${(451.5/count).toFixed(2)} each`:'Select people';
+  };
+});
 
 flipCamera.onclick=async()=>{
   facingMode=facingMode==='environment'?'user':'environment';
