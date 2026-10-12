@@ -48,13 +48,14 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .modebar{height:48px;border-radius:25px;background:rgba(12,12,12,.72);padding:0 9px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .mode{padding:8px 18px;border-radius:21px;color:#9a9a9f;font-size:18px;letter-spacing:.2px}
 .mode.active{color:#d8c74a;background:rgba(48,48,48,.72)}
-#splitButton{display:none;position:absolute;top:69%;left:50%;width:auto;min-width:132px;height:29px;transform:translate(-50%,12px) scale(.78);border:0;border-radius:28px;background:#fff;color:#04060d;padding:6px 14px;box-shadow:0 6px 22px rgba(0,0,0,.24);align-items:center;justify-content:center;gap:8px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:400;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;-webkit-tap-highlight-color:transparent;will-change:transform,opacity}
-#splitButton.show{display:flex;animation:splitBillAppear 620ms cubic-bezier(.18,1.35,.36,1) forwards}
-#splitButton:active{transform:translate(-50%,0) scale(.93);filter:brightness(.94)}
+#splitButton{display:none;position:absolute;top:69%;left:50%;width:auto;min-width:132px;height:38px;transform:translate3d(-50%,12px,0) scale(.34,.76);border:1px solid rgba(255,255,255,.38);border-radius:999px;background:rgba(255,255,255,.15);color:#fff;padding:7px 15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 10px 30px rgba(0,0,0,.28);backdrop-filter:blur(25px) saturate(150%);-webkit-backdrop-filter:blur(25px) saturate(150%);align-items:center;justify-content:center;gap:9px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:500;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;will-change:transform,opacity;transform-origin:center center}
+#splitButton.show{display:flex;animation:splitBillAppear 640ms cubic-bezier(.175,.885,.32,1.275) forwards}
+#splitButton.show.is-pressed{animation:none;opacity:1;transform:translate3d(-50%,0,0) scale(.95);transition:transform 90ms cubic-bezier(.32,.72,0,1),background-color 90ms cubic-bezier(.32,.72,0,1);background:rgba(255,255,255,.22)}
+#splitButton.show.is-releasing{animation:none;opacity:1;transform:translate3d(-50%,0,0) scale(1);transition:transform 420ms cubic-bezier(.175,.885,.32,1.275),background-color 280ms cubic-bezier(.32,.72,0,1)}
 .splitIcon{width:14px;height:14px;flex:0 0 14px;display:block}
 .splitLabel{white-space:nowrap}
-.splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#000;font-size:16px;font-weight:400;line-height:1}
-@keyframes splitBillAppear{0%{opacity:0;transform:translate(-50%,12px) scale(.78)}65%{opacity:1;transform:translate(-50%,-1px) scale(1.04)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
+.splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#fff;font-size:16px;font-weight:400;line-height:1}
+@keyframes splitBillAppear{0%{opacity:0;transform:translate3d(-50%,12px,0) scale(.34,.76)}58%{opacity:1;transform:translate3d(-50%,-2px,0) scale(1.055,.96)}78%{transform:translate3d(-50%,1px,0) scale(.985,1.025)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
 @media (prefers-reduced-motion:reduce){#splitButton.show{animation-duration:1ms}}
 #status{position:absolute;top:calc(env(safe-area-inset-top) + 15px);left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:16px;background:rgba(0,0,0,.55);font-size:11px;opacity:0;transition:.2s;z-index:20}
 #status.show{opacity:1}
@@ -485,7 +486,8 @@ function showSection(step){
   requestAnimationFrame(()=>document.body.classList.add('assign-entering'));
 }
 
-splitButton.onclick=()=>{
+function openDetectedBill(){
+  if(splitButton.disabled)return;
   stopReceiptDetection();
   splitButton.disabled=true;
   processingOverlay.classList.add('show');
@@ -496,7 +498,51 @@ splitButton.onclick=()=>{
     showSection(0);
     splitButton.disabled=false;
   },1050);
-};
+}
+
+let splitTouchStartX=0;
+let splitTouchStartY=0;
+let splitTouchMoved=false;
+
+splitButton.addEventListener('touchstart',event=>{
+  if(splitButton.disabled)return;
+  const touch=event.changedTouches[0];
+  splitTouchStartX=touch.clientX;
+  splitTouchStartY=touch.clientY;
+  splitTouchMoved=false;
+  splitButton.classList.remove('is-releasing');
+  splitButton.classList.add('is-pressed');
+},{passive:true});
+
+splitButton.addEventListener('touchmove',event=>{
+  const touch=event.changedTouches[0];
+  if(Math.hypot(touch.clientX-splitTouchStartX,touch.clientY-splitTouchStartY)>12){
+    splitTouchMoved=true;
+    splitButton.classList.remove('is-pressed');
+    splitButton.classList.add('is-releasing');
+  }
+},{passive:true});
+
+splitButton.addEventListener('touchend',event=>{
+  event.preventDefault();
+  const touch=event.changedTouches[0];
+  const bounds=splitButton.getBoundingClientRect();
+  const endedInside=touch.clientX>=bounds.left&&touch.clientX<=bounds.right&&touch.clientY>=bounds.top&&touch.clientY<=bounds.bottom;
+  splitButton.classList.remove('is-pressed');
+  splitButton.classList.add('is-releasing');
+  if(!splitTouchMoved&&endedInside)openDetectedBill();
+},{passive:false});
+
+splitButton.addEventListener('touchcancel',()=>{
+  splitButton.classList.remove('is-pressed');
+  splitButton.classList.add('is-releasing');
+},{passive:true});
+
+splitButton.addEventListener('keydown',event=>{
+  if(event.key!=='Enter'&&event.key!==' ')return;
+  event.preventDefault();
+  openDetectedBill();
+});
 
 friendsButton.onclick=()=>{
   friendsButton.classList.add('is-pressed');
