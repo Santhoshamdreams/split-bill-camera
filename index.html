@@ -48,34 +48,15 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .modebar{height:48px;border-radius:25px;background:rgba(12,12,12,.72);padding:0 9px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .mode{padding:8px 18px;border-radius:21px;color:#9a9a9f;font-size:18px;letter-spacing:.2px}
 .mode.active{color:#d8c74a;background:rgba(48,48,48,.72)}
-#splitButton{display:none;position:absolute;top:69%;left:50%;width:auto;min-width:132px;height:38px;transform:translate3d(-50%,12px,0) scale(.34,.76);border:1px solid rgba(255,255,255,.38);border-radius:999px;background:rgba(255,255,255,.15);color:#fff;padding:7px 15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 10px 30px rgba(0,0,0,.28);backdrop-filter:blur(25px) saturate(150%);-webkit-backdrop-filter:blur(25px) saturate(150%);align-items:center;justify-content:center;gap:9px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:500;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;will-change:transform,opacity;transform-origin:center center}
+#splitButton{display:none;position:absolute;top:69%;left:50%;width:auto;min-width:132px;height:38px;transform:translate3d(-50%,12px,0) scale(.34,.76);border:1px solid rgba(255,255,255,.92);border-radius:999px;background:#fff;color:#080b14;padding:7px 15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 10px 30px rgba(0,0,0,.28);align-items:center;justify-content:center;gap:9px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:500;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;will-change:transform,opacity;transform-origin:center center}
 #splitButton.show{display:flex;animation:splitBillAppear 640ms cubic-bezier(.175,.885,.32,1.275) forwards}
-#splitButton.show.is-pressed{animation:none;opacity:1;transform:translate3d(-50%,0,0) scale(.95);transition:transform 90ms cubic-bezier(.32,.72,0,1),background-color 90ms cubic-bezier(.32,.72,0,1);background:rgba(255,255,255,.22)}
+#splitButton.show.is-pressed{animation:none;opacity:1;transform:translate3d(-50%,0,0) scale(.95);transition:transform 90ms cubic-bezier(.32,.72,0,1),background-color 90ms cubic-bezier(.32,.72,0,1);background:#ededf1}
 #splitButton.show.is-releasing{animation:none;opacity:1;transform:translate3d(-50%,0,0) scale(1);transition:transform 420ms cubic-bezier(.175,.885,.32,1.275),background-color 280ms cubic-bezier(.32,.72,0,1)}
 .splitIcon{width:14px;height:14px;flex:0 0 14px;display:block}
 .splitLabel{white-space:nowrap}
-.splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#fff;font-size:16px;font-weight:400;line-height:1}
+.splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#080b14;font-size:16px;font-weight:400;line-height:1}
 @keyframes splitBillAppear{0%{opacity:0;transform:translate3d(-50%,12px,0) scale(.34,.76)}58%{opacity:1;transform:translate3d(-50%,-2px,0) scale(1.055,.96)}78%{transform:translate3d(-50%,1px,0) scale(.985,1.025)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
 @media (prefers-reduced-motion:reduce){#splitButton.show{animation-duration:1ms}}
-#scanning-overlay{position:absolute;inset:0;z-index:12;display:grid;place-items:center;padding:24px;pointer-events:none;opacity:0;visibility:hidden;transform:translate3d(0,0,0) scale(.9);transition:transform .5s cubic-bezier(.175,.885,.32,1.2),opacity .4s ease,visibility 0s cubic-bezier(.32,.72,0,1) .5s;will-change:transform,opacity}
-#scanning-overlay.is-scanning{opacity:1;visibility:visible;transform:translate3d(0,0,0) scale(1);transition:transform .5s cubic-bezier(.175,.885,.32,1.2),opacity .4s ease,visibility 0s cubic-bezier(.32,.72,0,1) 0s}
-.siri-pill-capsule{position:relative;width:min(286px,calc(100vw - 48px));min-height:128px;padding:20px 22px 18px;border:1px solid rgba(255,255,255,.15);border-radius:40px;background:rgba(10,10,10,.55);box-shadow:0 20px 40px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.2),-18px 0 38px rgba(255,123,0,.12),18px 0 42px rgba(0,246,255,.14);backdrop-filter:blur(25px) saturate(160%);-webkit-backdrop-filter:blur(25px) saturate(160%);overflow:hidden;transform:translateZ(0);will-change:transform,opacity}
-.siri-pill-capsule::before{content:"";position:absolute;inset:-45%;background:radial-gradient(circle at 30% 52%,rgba(255,123,0,.16),transparent 30%),radial-gradient(circle at 72% 48%,rgba(0,246,255,.18),transparent 32%);transform:translateZ(0);animation:siriAuraDrift 7s cubic-bezier(.32,.72,0,1) infinite alternate;will-change:transform;pointer-events:none}
-.siri-wave-wrapper{position:relative;height:62px;overflow:hidden;isolation:isolate;transform:translateZ(0);will-change:transform}
-.siri-wave{position:absolute;inset:0;width:100%;height:100%;overflow:visible;mix-blend-mode:screen;transform-origin:center;transform:translateZ(0);will-change:transform,opacity}
-.siri-wave path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.siri-wave.back{animation:siriWaveBack 7s cubic-bezier(.32,.72,0,1) infinite alternate}.siri-wave.back path{stroke:url(#siri-cool-gradient);stroke-width:11;filter:blur(3.5px);opacity:.82}
-.siri-wave.mid{animation:siriWaveMid 9s cubic-bezier(.175,.885,.32,1.275) infinite alternate-reverse}.siri-wave.mid path{stroke:url(#siri-warm-gradient);stroke-width:9;filter:blur(2.2px);opacity:.88}
-.siri-wave.front{animation:siriWaveFront 5s cubic-bezier(.32,.72,0,1) infinite alternate}.siri-wave.front path{stroke:url(#siri-front-gradient);stroke-width:4;filter:drop-shadow(0 0 7px rgba(255,255,255,.65));opacity:.96}
-.siri-wave.glow{animation:siriWaveGlow 11s cubic-bezier(.175,.885,.32,1.275) infinite alternate-reverse}.siri-wave.glow path{stroke:url(#siri-glow-gradient);stroke-width:16;filter:blur(7px);opacity:.35}
-.scanning-text{position:relative;margin-top:9px;color:rgba(255,255,255,.82);font:500 13px/18px "Inter",-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.2px;text-align:center;animation:scanningTextPulse 5s cubic-bezier(.32,.72,0,1) infinite alternate;transform:translateZ(0);will-change:transform,opacity}
-@keyframes siriWaveBack{0%{transform:translate3d(-7px,1px,0) scaleY(.72) skewX(-7deg)}55%{transform:translate3d(5px,-2px,0) scaleY(1.12) skewX(5deg)}100%{transform:translate3d(9px,2px,0) scaleY(.83) skewX(-3deg)}}
-@keyframes siriWaveMid{0%{transform:translate3d(8px,-1px,0) scaleY(.78) skewX(7deg)}48%{transform:translate3d(-4px,2px,0) scaleY(1.18) skewX(-6deg)}100%{transform:translate3d(-10px,-2px,0) scaleY(.9) skewX(4deg)}}
-@keyframes siriWaveFront{0%{transform:translate3d(-4px,0,0) scaleY(.82) skewX(-4deg)}47%{transform:translate3d(7px,1px,0) scaleY(1.08) skewX(6deg)}100%{transform:translate3d(2px,-1px,0) scaleY(.92) skewX(-5deg)}}
-@keyframes siriWaveGlow{0%{transform:translate3d(5px,1px,0) scaleY(.68) skewX(5deg)}50%{transform:translate3d(-7px,-1px,0) scaleY(1.22) skewX(-5deg)}100%{transform:translate3d(9px,2px,0) scaleY(.86) skewX(3deg)}}
-@keyframes siriAuraDrift{0%{transform:translate3d(-5%,1%,0) rotate(-3deg)}100%{transform:translate3d(5%,-1%,0) rotate(3deg)}}
-@keyframes scanningTextPulse{0%{opacity:.58;transform:translate3d(0,1px,0)}100%{opacity:1;transform:translate3d(0,-1px,0)}}
-@media (prefers-reduced-motion:reduce){#scanning-overlay,.siri-pill-capsule::before,.siri-wave,.scanning-text{animation:none!important;transition-duration:1ms!important}}
 #status{position:absolute;top:calc(env(safe-area-inset-top) + 15px);left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:16px;background:rgba(0,0,0,.55);font-size:11px;opacity:0;transition:.2s;z-index:20}
 #status.show{opacity:1}
 #permission{position:absolute;inset:0;background:#000;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:30}
@@ -150,17 +131,32 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
 @keyframes dropMagic{0%{transform:scale(1)}38%{transform:scale(1.15);box-shadow:0 0 28px rgba(178,255,142,.85)}100%{transform:scale(1);box-shadow:none}}
 @keyframes vividGradientDrift{0%{background-position:8% 12%,82% 82%,20% 50%;transform:translate3d(-3%,-2%,0) scale(1.02);filter:saturate(1)}50%{background-position:76% 42%,20% 58%,70% 50%;transform:translate3d(2%,1%,0) scale(1.08);filter:saturate(1.28)}100%{background-position:22% 88%,88% 18%,35% 50%;transform:translate3d(-1%,3%,0) scale(1.05);filter:saturate(1.12)}}
 .billGlow{animation:vividGradientDrift 7s cubic-bezier(.45,0,.55,1) infinite alternate;background-size:180% 180%,175% 175%,150% 150%}
-.finalPanel{height:auto;min-height:0;padding-bottom:17px}.successLottie{width:110px;height:110px;margin:5px auto 0}.finalHero h2{margin-top:1px}.finalHero p{margin-top:10px}.finalActions{left:calc(50% - 121.5px);width:243px}.finalAction.view{width:243px}.show-final.final-entering .successLottie{animation:liquidSuccessIn 820ms 60ms cubic-bezier(.16,1.2,.3,1) both}
-.processingOverlay{position:absolute;inset:0;z-index:35;display:grid;place-content:center;justify-items:center;gap:15px;background:rgba(0,0,0,.18);backdrop-filter:blur(13px) saturate(1.2);-webkit-backdrop-filter:blur(13px) saturate(1.2);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility 0s linear .22s}.processingOverlay.show{opacity:1;visibility:visible;transition:opacity .24s ease}.processingOrb{position:relative;width:88px;height:88px;border-radius:50%;filter:drop-shadow(0 14px 30px rgba(103,62,255,.35));animation:siriWobble 1.65s ease-in-out infinite}.processingOrb::before{content:"";position:absolute;inset:0;border-radius:inherit;background:conic-gradient(from 20deg,#5ddcff,#6c55ff,#e749ff,#ff668e,#ffc15c,#5fffd2,#5ddcff);animation:siriSpin 1.35s linear infinite}.processingOrb::after{content:"";position:absolute;inset:7px;border-radius:inherit;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.34),rgba(10,12,31,.84) 45%,rgba(5,6,18,.96) 72%);box-shadow:inset 0 0 17px rgba(255,255,255,.16)}.processingCore{position:absolute;inset:24px;z-index:1;border-radius:50%;background:radial-gradient(circle at 40% 32%,#fff 0 5%,#86ddff 18%,#7968ff 52%,#341c7c 100%);filter:blur(.2px);animation:siriCore 1.05s ease-in-out infinite alternate}.processingLabel{font-size:13px;font-weight:500;letter-spacing:.3px;color:rgba(255,255,255,.82)}
-@keyframes siriSpin{to{transform:rotate(360deg)}}
-@keyframes siriWobble{0%,100%{transform:scale(1) rotate(-2deg);border-radius:50% 47% 52% 48%}35%{transform:scale(1.06,.94) rotate(3deg);border-radius:46% 54% 45% 55%}68%{transform:scale(.95,1.07) rotate(-1deg);border-radius:55% 45% 54% 46%}}
-@keyframes siriCore{0%{transform:scale(.76);opacity:.72}100%{transform:scale(1.13);opacity:1}}
+.finalPanel{height:auto;min-height:0;padding-bottom:17px}.successLottie{width:110px;height:110px;margin:5px auto 0}.finalHero h2{margin-top:1px}.finalHero p{margin-top:10px}.finalActions{left:calc(50% - 121.5px);width:243px}.finalAction.view{width:243px}.show-final.final-entering .successLottie{animation:liquidSuccessIn 820ms 60ms cubic-bezier(.16,1.2,.3,1) both}.show-final.final-entering .finalHero{animation:peopleHeroIn 560ms 35ms cubic-bezier(.175,.885,.32,1.275) both}
+.processingOverlay{position:absolute;inset:0;z-index:35;display:flex;justify-content:center;align-items:flex-start;padding-top:calc(env(safe-area-inset-top) + 10px);background:rgba(0,0,0,.08);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 220ms cubic-bezier(.32,.72,0,1),visibility 0s cubic-bezier(.32,.72,0,1) 900ms;will-change:opacity}.processingOverlay.show{opacity:1;visibility:visible;transition:opacity 180ms cubic-bezier(.32,.72,0,1),visibility 0s cubic-bezier(.32,.72,0,1)}
+.processingIsland{position:relative;width:184px;height:108px;border-radius:46px;background:#020204;box-shadow:0 18px 44px rgba(0,0,0,.48),inset 0 1px 1px rgba(255,255,255,.08);overflow:hidden;transform:translate3d(0,0,0) scale(.54,.34);transform-origin:top center;opacity:0;will-change:transform,opacity,border-radius}
+.processingOverlay.show .processingIsland{animation:dynamicIslandBloom 1250ms cubic-bezier(.175,.885,.32,1.275) both}
+.islandSpectrum{position:absolute;left:-22%;right:-22%;bottom:-34px;height:92px;border-radius:50%;mix-blend-mode:screen;transform:translateZ(0);will-change:transform,opacity;filter:blur(8px)}
+.islandSpectrum.cool{background:radial-gradient(ellipse at 38% 28%,#00f6ff 0 10%,#4a00e0 30%,transparent 66%);animation:islandCoolFlow 900ms cubic-bezier(.32,.72,0,1) infinite alternate}
+.islandSpectrum.warm{background:radial-gradient(ellipse at 65% 30%,#fff 0 4%,#ff7b00 17%,#ff007f 38%,transparent 68%);animation:islandWarmFlow 1100ms cubic-bezier(.175,.885,.32,1.275) infinite alternate-reverse}
+.islandShimmer{position:absolute;left:24px;right:24px;bottom:24px;height:24px;border-radius:50%;background:linear-gradient(90deg,#00f6ff,#6f5cff 30%,#ff007f 60%,#ffb14a 82%,#fff);filter:blur(7px);mix-blend-mode:screen;opacity:.92;transform:translateZ(0);animation:islandShimmerFlow 700ms cubic-bezier(.32,.72,0,1) infinite alternate;will-change:transform,opacity}
+.processingLabel{position:absolute;inset:22px 0 auto;color:rgba(255,255,255,.88);font:500 12px/16px "Inter",-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.15px;text-align:center;opacity:0;transform:translate3d(0,8px,0);will-change:transform,opacity}.processingOverlay.show .processingLabel{animation:islandLabelIn 520ms 330ms cubic-bezier(.175,.885,.32,1.275) both}
+@keyframes dynamicIslandBloom{0%{opacity:0;transform:translate3d(0,-8px,0) scale(.54,.34);border-radius:54px}28%{opacity:1;transform:translate3d(0,0,0) scale(.58,.36);border-radius:52px}55%{transform:translate3d(0,2px,0) scale(1.07,.93);border-radius:42px 48px 45px 50px}72%{transform:translate3d(0,-1px,0) scale(.96,1.06);border-radius:49px 43px 50px 44px}86%{transform:translate3d(0,1px,0) scale(1.025,.985);border-radius:45px 48px 44px 49px}100%{opacity:1;transform:translate3d(0,0,0) scale(1);border-radius:46px}}
+@keyframes islandCoolFlow{0%{opacity:.62;transform:translate3d(-10px,7px,0) scale(.92,.78) rotate(-4deg)}100%{opacity:1;transform:translate3d(12px,-3px,0) scale(1.1,1.03) rotate(3deg)}}
+@keyframes islandWarmFlow{0%{opacity:.65;transform:translate3d(11px,5px,0) scale(.9,.82) rotate(4deg)}100%{opacity:1;transform:translate3d(-12px,-4px,0) scale(1.12,1.06) rotate(-3deg)}}
+@keyframes islandShimmerFlow{0%{opacity:.62;transform:translate3d(-12px,4px,0) scale(.86,.72) skewX(-9deg)}100%{opacity:1;transform:translate3d(12px,-3px,0) scale(1.08,1.08) skewX(8deg)}}
+@keyframes islandLabelIn{0%{opacity:0;transform:translate3d(0,8px,0) scale(.92)}65%{opacity:1;transform:translate3d(0,-1px,0) scale(1.025)}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@media (prefers-reduced-motion:reduce){.processingOverlay,.processingIsland,.islandSpectrum,.islandShimmer,.processingLabel{animation:none!important;transition-duration:1ms!important}.processingOverlay.show .processingIsland,.processingOverlay.show .processingLabel{opacity:1;transform:none}}
 @keyframes liquidSuccessIn{0%{opacity:0;transform:scale(.42) rotate(-9deg)}52%{opacity:1;transform:scale(1.1,.94) rotate(3deg)}70%{transform:scale(.96,1.06) rotate(-2deg)}84%{transform:scale(1.025,.985) rotate(1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes cardScreenIn{0%{opacity:0;transform:translateY(8px) scale(.955);filter:blur(5px) brightness(.86)}58%{opacity:1;transform:translateY(-3px) scale(1.018,.987);filter:blur(0) brightness(1.04)}76%{transform:translateY(1px) scale(.992,1.008)}89%{transform:translateY(0) scale(1.004,.997)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0) brightness(1)}}
 @keyframes peopleHeroIn{0%{opacity:0;transform:translateY(14px) scale(.94,.98)}58%{opacity:1;transform:translateY(-3px) scale(1.018,.99)}78%{transform:translateY(1px) scale(.993,1.008)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes peopleElementIn{0%{opacity:0;transform:translateY(15px) scale(.96);filter:blur(4px)}62%{opacity:1;transform:translateY(-2px) scale(1.012,.992);filter:blur(0)}82%{transform:translateY(1px) scale(.996,1.004)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 @keyframes billContentIn{0%{opacity:0;transform:translateY(13px) scale(.965);filter:blur(3px)}65%{opacity:1;transform:translateY(-2px) scale(1.012,.993);filter:blur(0)}84%{transform:translateY(1px) scale(.997,1.003)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 @keyframes billRowIn{0%{opacity:0;transform:translateY(15px) scale(.945,.98)}60%{opacity:1;transform:translateY(-2px) scale(1.016,.992)}80%{transform:translateY(1px) scale(.995,1.006)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.billPanel,.peoplePanel,.assignPanel,.finalPanel,.billHero,.peopleHero,.assignHero,.finalHero,.billRow,.profile,.assignPerson,.assignRow,.finalRow,.friendsButton,.peopleAction,.assignCTA,.finalAction,.foodStrip,.peopleSearch{will-change:transform,opacity;backface-visibility:hidden}
+.show-bill.bill-entering #billScreen,.show-bill.bill-entering .billHero,.show-bill.bill-entering .billProgress,.show-bill.bill-entering .billEyebrow,.show-bill.bill-entering .billAmount,.show-bill.bill-entering .billMeta,.show-bill.bill-entering .billCount,.show-bill.bill-entering .billTax,.show-bill.bill-entering .billRow,.show-bill.bill-entering .billHint,.show-bill.bill-entering .friendsButton,.show-people.people-entering #peopleScreen,.show-people.people-entering .peopleHero,.show-people.people-entering .foodStrip,.show-people.people-entering .peopleSearch,.show-people.people-entering .profile,.show-people.people-entering .peopleActions,.show-assign.assign-entering #assignScreen,.show-assign.assign-entering .assignHero,.show-assign.assign-entering .assignPeople,.show-assign.assign-entering .assignContent,.show-assign.assign-entering .assignCTA,.show-final.final-entering #finalScreen,.show-final.final-entering .successLottie,.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p,.show-final.final-entering .finalRow,.show-final.final-entering .finalNote,.show-final.final-entering .finalActions{animation-timing-function:cubic-bezier(.175,.885,.32,1.275)!important}
+@keyframes finalRowIn{0%{opacity:0;transform:translate3d(0,14px,0) scale(.94,.98);filter:blur(3px)}58%{opacity:1;transform:translate3d(0,-2px,0) scale(1.018,.988);filter:blur(0)}78%{transform:translate3d(0,1px,0) scale(.993,1.008)}100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@keyframes foodStripIn{0%{opacity:0;transform:translate3d(-50%,14px,0) scale(.9,.96)}58%{opacity:1;transform:translate3d(-50%,-2px,0) scale(1.025,.985)}78%{transform:translate3d(-50%,1px,0) scale(.992,1.01)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
+@keyframes peopleActionsIn{0%{opacity:0;transform:translate3d(0,18px,0) scale(calc(var(--bill-scale,1) * .9),calc(var(--bill-scale,1) * .96))}58%{opacity:1;transform:translate3d(0,-2px,0) scale(calc(var(--bill-scale,1) * 1.025),calc(var(--bill-scale,1) * .99))}78%{transform:translate3d(0,1px,0) scale(calc(var(--bill-scale,1) * .992),calc(var(--bill-scale,1) * 1.008))}100%{opacity:1;transform:translate3d(0,0,0) scale(var(--bill-scale,1))}}
 .show-people.people-entering #peopleScreen,.show-assign.assign-entering #assignScreen{animation:cardScreenIn 460ms cubic-bezier(.22,1,.36,1) both}
 .show-people.people-entering .foodStrip{animation:foodStripIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}
 @media (prefers-reduced-motion:reduce){.show-final.final-entering #finalScreen,.show-final.final-entering .successBadge,.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p,.show-final.final-entering .finalRow,.show-final.final-entering .finalNote,.show-final.final-entering .finalActions{animation-duration:1ms!important;animation-delay:0ms!important}}
@@ -227,21 +223,13 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
   </div>
 </div>
 
-<div id="scanning-overlay" role="status" aria-live="polite" aria-hidden="true">
-  <div class="siri-pill-capsule">
-    <div class="siri-wave-wrapper" aria-hidden="true">
-      <svg class="siri-wave glow" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-glow-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00f6ff"/><stop offset=".48" stop-color="#ff007f"/><stop offset="1" stop-color="#ff7b00"/></linearGradient></defs><path d="M-8 34 C18 5 40 57 67 30 S111 6 136 33 S178 58 201 28 S229 10 248 32"/></svg>
-      <svg class="siri-wave back" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-cool-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00f6ff"/><stop offset="1" stop-color="#4a00e0"/></linearGradient></defs><path d="M-8 31 C17 9 42 50 66 28 S108 10 132 32 S173 51 198 27 S228 13 248 30"/></svg>
-      <svg class="siri-wave mid" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-warm-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff007f"/><stop offset="1" stop-color="#ff7b00"/></linearGradient></defs><path d="M-8 35 C15 55 42 8 69 34 S110 54 137 29 S178 8 202 35 S230 51 248 30"/></svg>
-      <svg class="siri-wave front" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-front-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7effff"/><stop offset=".45" stop-color="#e985ff"/><stop offset=".72" stop-color="#ff4f9a"/><stop offset="1" stop-color="#ffd37e"/></linearGradient></defs><path d="M-8 32 C19 19 38 44 64 31 S106 17 132 33 S177 45 200 29 S229 20 248 32"/></svg>
-    </div>
-    <div class="scanning-text">Reading bill data...</div>
-  </div>
-</div>
-
 <div id="processingOverlay" class="processingOverlay" aria-hidden="true">
-  <div class="processingOrb" aria-hidden="true"><span class="processingCore"></span></div>
-  <div class="processingLabel">Preparing your bill…</div>
+  <div class="processingIsland" role="status" aria-live="polite">
+    <div class="islandSpectrum cool" aria-hidden="true"></div>
+    <div class="islandSpectrum warm" aria-hidden="true"></div>
+    <div class="islandShimmer" aria-hidden="true"></div>
+    <div class="processingLabel">Understanding your bill…</div>
+  </div>
 </div>
 
 <section id="billScreen" aria-label="Split Bill summary">
@@ -358,7 +346,6 @@ const status=document.getElementById('status');
 const detectedTop=document.getElementById('detectedTop');
 const detectedTools=document.getElementById('detectedTools');
 const splitButton=document.getElementById('splitButton');
-const scanningOverlay=document.getElementById('scanning-overlay');
 const processingOverlay=document.getElementById('processingOverlay');
 const billCard=document.getElementById('billCard');
 const flipCamera=document.getElementById('flipCamera');
@@ -436,17 +423,6 @@ async function startCamera(){
 function stopReceiptDetection(){
   clearInterval(scanTimer);
   scanTimer=null;
-  stopScanningAnimation();
-}
-
-function startScanningAnimation(){
-  scanningOverlay.classList.add('is-scanning');
-  scanningOverlay.setAttribute('aria-hidden','false');
-}
-
-function stopScanningAnimation(){
-  scanningOverlay.classList.remove('is-scanning');
-  scanningOverlay.setAttribute('aria-hidden','true');
 }
 
 function isReceiptText(text){
@@ -465,7 +441,6 @@ async function scanForReceipt(){
     canvas.width=Math.max(1,Math.round(video.videoWidth*scale));
     canvas.height=Math.max(1,Math.round(video.videoHeight*scale));
     canvas.getContext('2d',{willReadFrequently:true}).drawImage(video,0,0,canvas.width,canvas.height);
-    startScanningAnimation();
     const result=await Tesseract.recognize(canvas,'eng',{logger:()=>{}});
     scanAttempts++;
     if(isReceiptText(result.data.text)){
@@ -476,7 +451,6 @@ async function scanForReceipt(){
   }catch(error){
     // Keep camera scanning available if OCR is temporarily unavailable.
   }finally{
-    stopScanningAnimation();
     scanInProgress=false;
     if(scanAttempts>=20)stopReceiptDetection();
   }
@@ -542,7 +516,7 @@ function openDetectedBill(){
     processingOverlay.setAttribute('aria-hidden','true');
     showSection(0);
     splitButton.disabled=false;
-  },1050);
+  },1350);
 }
 
 let splitTouchStartX=0;
