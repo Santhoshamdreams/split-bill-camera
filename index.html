@@ -10,6 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>Split Bill Camera</title>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
 <style>
 :root{font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Arial,sans-serif}
 *{box-sizing:border-box}
@@ -124,8 +125,12 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
 .peopleActions{top:var(--people-actions-top,697px)}
 .assignPerson.is-target .assignPersonAvatar{box-shadow:0 0 22px rgba(182,255,147,.55);transform:scale(1.05)}
 .assignRow{transition:opacity .16s ease,transform .16s ease}.assignRow.assigned{opacity:0;transform:scale(.96)}
+.assignEmpty{display:none;min-height:164px;padding:30px 18px 18px;text-align:center;color:#fff}.assignContent.is-empty .assignHint,.assignContent.is-empty .assignRows{display:none}.assignContent.is-empty .assignEmpty{display:block;animation:finalRowIn 420ms cubic-bezier(.22,1,.36,1) both}.assignEmptyIcon{width:54px;height:54px;margin:0 auto 14px;border-radius:18px;background:rgba(255,255,255,.11);display:grid;place-items:center;box-shadow:inset 0 1px 1px rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.assignEmptyIcon svg{width:29px;height:29px}.assignEmpty h3{margin:0;font-size:19px;font-weight:600}.assignEmpty p{margin:7px 0 0;color:#969699;font-size:13px}
 .assignCTA{left:calc(50% - 145px);width:290px}
 @keyframes dropMagic{0%{transform:scale(1)}38%{transform:scale(1.15);box-shadow:0 0 28px rgba(178,255,142,.85)}100%{transform:scale(1);box-shadow:none}}
+@keyframes vividGradientDrift{0%{background-position:8% 12%,82% 82%,20% 50%;transform:translate3d(-3%,-2%,0) scale(1.02);filter:saturate(1)}50%{background-position:76% 42%,20% 58%,70% 50%;transform:translate3d(2%,1%,0) scale(1.08);filter:saturate(1.28)}100%{background-position:22% 88%,88% 18%,35% 50%;transform:translate3d(-1%,3%,0) scale(1.05);filter:saturate(1.12)}}
+.billGlow{animation:vividGradientDrift 7s cubic-bezier(.45,0,.55,1) infinite alternate;background-size:180% 180%,175% 175%,150% 150%}
+.finalPanel{height:auto;min-height:0;padding-bottom:17px}.successLottie{width:78px;height:78px;margin:22px auto 0}.finalHero h2{margin-top:12px}.finalHero p{margin-top:14px}.finalActions{left:calc(50% - 121.5px);width:243px}.finalAction.view{width:243px}.show-final.final-entering .successLottie{animation:successPop 550ms 80ms cubic-bezier(.18,1.35,.36,1) both}
 .show-people.people-entering #peopleScreen,.show-assign.assign-entering #assignScreen{animation:cardScreenIn 460ms cubic-bezier(.22,1,.36,1) both}
 .show-people.people-entering .foodStrip{animation:foodStripIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}
 @media (prefers-reduced-motion:reduce){.show-final.final-entering #finalScreen,.show-final.final-entering .successBadge,.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p,.show-final.final-entering .finalRow,.show-final.final-entering .finalNote,.show-final.final-entering .finalActions{animation-duration:1ms!important;animation-delay:0ms!important}}
@@ -271,6 +276,7 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
         <div class="assignRow" data-price="105" data-item="Filter Coffee" data-image="assets/Coffee.png"><span class="assignHandle" aria-hidden="true"></span><img class="assignThumb" src="assets/Coffee.png" alt=""><span class="assignItem">Filter Coffee</span><span class="assignQty">×3</span><strong class="assignPrice">₹105</strong></div>
         <div class="assignRow" data-price="60" data-item="Parotta" data-image="assets/Parotta.png"><span class="assignHandle" aria-hidden="true"></span><img class="assignThumb" src="assets/Parotta.png" alt=""><span class="assignItem">Parotta</span><strong class="assignPrice">₹60</strong></div>
       </div>
+      <div class="assignEmpty" role="status"><div class="assignEmptyIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></div><h3>All items assigned</h3><p>Ready to create your group.</p></div>
     </div>
   </article>
   <button class="assignCTA" type="button">Create Group &amp; Send Request</button>
@@ -281,7 +287,7 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
   <div class="billBackdrop"></div><div class="billGlow"></div>
   <article class="finalPanel">
     <header class="finalHero">
-      <div class="successBadge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12 4 4 8-8"/></svg></div>
+      <div id="successLottie" class="successLottie" aria-hidden="true"></div>
       <h2>Group Created<br>&amp; Request Sent</h2>
       <p>SRI KAVERI MESS · 25 OCT 2026</p>
     </header>
@@ -293,7 +299,7 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
       <p class="finalNote">GST split in proportion</p>
     </div>
   </article>
-  <div class="finalActions"><button class="finalAction view" type="button">View Group</button><button class="finalAction undo" type="button"><span class="undoRing" aria-hidden="true"></span>Undo · 10s</button></div>
+  <div class="finalActions"><button class="finalAction view" type="button">View Group</button></div>
 </section>
 
 <div id="status"></div>
@@ -313,7 +319,10 @@ const splitCount=document.getElementById('splitCount');
 const splitEach=document.getElementById('splitEach');
 const splitByItem=document.querySelector('.peopleAction.primary');
 const assignCTA=document.querySelector('.assignCTA');
+const assignContent=document.querySelector('.assignContent');
+const assignRows=document.querySelector('.assignRows');
 const dragGhost=document.getElementById('dragGhost');
+let successAnimation=null;
 let stream=null;
 let facingMode='environment';
 let scanTimer=null;
@@ -335,6 +344,15 @@ function syncBillScale(){
 }
 
 function toast(t){status.textContent=t;status.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>status.classList.remove('show'),1800)}
+
+function playSuccessLottie(){
+  if(!window.lottie)return;
+  if(!successAnimation){
+    successAnimation=window.lottie.loadAnimation({container:document.getElementById('successLottie'),renderer:'svg',loop:false,autoplay:true,path:'assets/success-white.json',rendererSettings:{preserveAspectRatio:'xMidYMid meet'}});
+  }else{
+    successAnimation.goToAndPlay(0,true);
+  }
+}
 
 async function startCamera(){
   if(!window.isSecureContext && location.hostname!=='localhost' && location.hostname!=='127.0.0.1'){
@@ -442,7 +460,7 @@ function showSection(step){
     assignCTA.classList.remove('is-pressed');
     document.body.classList.remove('show-people','show-assign');
     document.body.classList.add('show-final');
-    requestAnimationFrame(()=>document.body.classList.add('final-entering'));
+    requestAnimationFrame(()=>{document.body.classList.add('final-entering');playSuccessLottie()});
     return;
   }
   document.body.classList.remove('show-final');
@@ -540,7 +558,10 @@ document.querySelectorAll('.assignRow').forEach(row=>{
       updateAssignedBadge(person);
       target.classList.add('magic');
       row.classList.add('assigned');
-      setTimeout(()=>row.remove(),180);
+      setTimeout(()=>{
+        row.remove();
+        if(!assignRows.children.length)assignContent.classList.add('is-empty');
+      },180);
       setTimeout(()=>target.classList.remove('magic'),650);
     }
     clearDropTargets();
