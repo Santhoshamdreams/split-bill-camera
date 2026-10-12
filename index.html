@@ -91,7 +91,21 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .peoplePanel{left:calc(50% - 173px);transform:scale(var(--bill-scale,1))}.peopleActions{left:calc(50% - 121.5px);transform:scale(var(--bill-scale,1))}
 .progressControl{cursor:pointer;touch-action:pan-y}.peopleActions{top:var(--people-actions-top,697px)}
 #assignScreen{display:none;position:absolute;inset:0;overflow:hidden;color:#fff;background:#080808;z-index:50;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif}.show-assign #billScreen,.show-assign #peopleScreen,.show-assign .friendsButton{display:none}.show-assign #assignScreen{display:block}.assignPanel{position:absolute;top:var(--bill-panel-top,93.5px);left:calc(50% - 173px);width:346px;height:584px;transform:scale(var(--bill-scale,1));transform-origin:top center;padding:10px;border-radius:40px;background:#101010;box-shadow:0 24px 55px rgba(0,0,0,.5);overflow:hidden}.assignHero{height:150px;border-radius:34px 34px 40px 40px;background:#298700 url("assets/bill-green.png") center/cover;text-align:center}.assignProgress{position:absolute;top:18px;left:50%;width:104px;transform:translateX(-50%);display:flex;gap:6px}.assignProgress span{height:8px;flex:1;border-radius:999px;background:#fff}.assignEyebrow{margin:0;padding-top:36px;font-size:15px;font-weight:600;letter-spacing:2px}.assignAmount{margin-top:9px;font-size:48px;font-weight:400;line-height:.92;letter-spacing:-2px}.assignMeta{margin-top:12px;color:rgba(255,255,255,.85);font-size:13px;font-weight:500;letter-spacing:1.65px;white-space:nowrap}.assignPeople{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:25px 8px 0}.assignPerson{position:relative;border:0;background:transparent;color:#fff;font:500 12px/15px "Inter",sans-serif;text-align:center;padding:0;min-width:0;transition:transform .22s cubic-bezier(.22,1,.36,1)}.assignPersonAvatar{width:58px;height:58px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);font-size:22px}.assignPerson.is-target .assignPersonAvatar{box-shadow:0 0 0 3px rgba(255,255,255,.84),0 0 22px rgba(182,255,147,.7);transform:scale(1.08)}.assignPerson.magic .assignPersonAvatar{animation:dropMagic 620ms cubic-bezier(.22,1,.36,1)}.assignBadge{display:none;position:absolute;top:-14px;left:-4px;padding:5px 10px;border-radius:18px;background:#fff;color:#08080a;font-size:12px;font-weight:600;box-shadow:0 7px 20px rgba(0,0,0,.3)}.assignBadge.show{display:block}.assignName{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.assignContent{padding:34px 8px 0}.assignHint{margin:0 0 13px;color:#a6a6a8;font-size:13px}.assignRows{display:grid;gap:12px}.assignRow{height:48px;display:flex;align-items:center;gap:10px;padding:6px 16px;border:0;border-radius:20px;background:rgba(255,255,255,.10);box-shadow:inset 0 1px 1px rgba(255,255,255,.08),inset 0 -12px 22px rgba(0,0,0,.05);backdrop-filter:blur(4px) saturate(1.25);-webkit-backdrop-filter:blur(4px) saturate(1.25);touch-action:none}.assignRow.is-dragging{opacity:.3}.assignRow.assigned{opacity:.46}.assignHandle{width:14px;height:22px;flex:0 0 14px;background:radial-gradient(circle at 3px 3px,#aaa 2px,transparent 2.5px) 0 0/7px 7px}.assignThumb{width:38px;height:36px;object-fit:contain}.assignItem{flex:1;font-size:17px;white-space:nowrap}.assignQty{font-size:16px}.assignPrice{font-size:18px;font-weight:600}.dragGhost{display:none;position:fixed;z-index:100;pointer-events:none;width:230px;height:50px;padding:6px 14px;border-radius:22px;background:rgba(44,44,46,.92);box-shadow:0 18px 34px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);align-items:center;gap:10px;color:#fff;font-size:16px;font-weight:500;transform:translate3d(-50%,-50%,0) scale(.92)}.dragGhost.show{display:flex;animation:ghostLift 220ms cubic-bezier(.22,1,.36,1) forwards}.dragGhost img{width:36px;height:36px;object-fit:contain}.assignCTA{position:absolute;top:var(--friends-top,733px);left:calc(50% - 145px);width:290px;height:52px;transform:scale(var(--bill-scale,1));transform-origin:top center;border:0;border-radius:28px;background:#fff;color:#07070a;font:600 17px/19px "Inter",sans-serif;letter-spacing:-.24px;box-shadow:0 12px 30px rgba(0,0,0,.23)}
-.show-bill.bill-entering #billScreen{animation:billScreenSlideIn 620ms cubic-bezier(.22,1,.36,1) both}
+html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:100%;min-height:100svh}
+.billGlow{animation-duration:9s;background-size:170% 170%,165% 165%,125% 125%;opacity:.96}
+.foodStrip{top:146px;width:249px;height:57px;border-radius:22px;background:rgba(20,20,21,.82);box-shadow:0 9px 22px rgba(0,0,0,.38),inset 0 1px 1px rgba(255,255,255,.16),inset 0 -1px 1px rgba(0,0,0,.28);overflow:hidden}
+.foodStrip img{width:40px;height:40px}.peopleContent{padding-top:59px}
+.assignCTA{left:calc(50% - 121.5px);width:243px}.assignCTA:active,.assignCTA.is-pressed{transform:scale(calc(var(--bill-scale,1) * .96));filter:brightness(.94)}
+@keyframes cardScreenIn{0%{opacity:0;transform:scale(1.012);filter:brightness(.88)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
+@keyframes cardScreenOut{to{opacity:0;transform:scale(.985);filter:brightness(.9)}}
+@keyframes successPop{0%{opacity:0;transform:scale(.58) rotate(-12deg)}72%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes finalRowIn{0%{opacity:0;transform:translateY(12px);filter:blur(3px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+.show-people.people-entering #peopleScreen,.show-assign.assign-entering #assignScreen{animation:cardScreenIn 460ms cubic-bezier(.22,1,.36,1) both}
+.show-people.people-entering .peopleHero,.show-assign.assign-entering .assignHero{animation:peopleHeroIn 480ms 40ms cubic-bezier(.22,1,.36,1) both}
+.assignPerson.magic .assignPersonAvatar{box-shadow:none}
+.assignPerson.is-target .assignPersonAvatar{box-shadow:0 0 20px rgba(182,255,147,.45);transform:scale(1.04)}
+#finalScreen{display:none;position:absolute;inset:0;overflow:hidden;color:#fff;background:#080808;z-index:55;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif}.show-final #billScreen,.show-final #peopleScreen,.show-final #assignScreen,.show-final .friendsButton{display:none}.show-final #finalScreen{display:block}.finalPanel{position:absolute;top:var(--bill-panel-top,93.5px);left:calc(50% - 173px);width:346px;height:584px;transform:scale(var(--bill-scale,1));transform-origin:top center;padding:10px;border-radius:40px;background:#101010;box-shadow:0 24px 55px rgba(0,0,0,.5);overflow:hidden}.finalHero{height:230px;border-radius:34px 34px 40px 40px;background:#298700 url("assets/bill-green.png") center/cover;text-align:center;overflow:hidden}.successBadge{width:64px;height:64px;margin:35px auto 0;display:grid;place-items:center;border-radius:22px;background:#fff;color:#4c970e;transform:rotate(45deg)}.successBadge svg{width:36px;height:36px;transform:rotate(-45deg)}.finalHero h2{margin:24px 0 0;font-size:25px;line-height:1.06;letter-spacing:-.8px}.finalHero p{margin:17px 0 0;color:rgba(255,255,255,.75);font-size:13px;font-weight:500;letter-spacing:1.4px}.finalDetails{padding:12px 0 0}.finalRow{height:54px;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:6px 16px;border-radius:20px;background:rgba(255,255,255,.10);box-shadow:inset 0 1px 1px rgba(255,255,255,.17),inset 0 -12px 22px rgba(0,0,0,.05);backdrop-filter:blur(5px) saturate(1.3);-webkit-backdrop-filter:blur(5px) saturate(1.3)}.finalName{width:93px;font-size:16px}.finalFoods{display:flex;align-items:center;gap:4px;flex:1}.finalFoods img{width:37px;height:37px;object-fit:contain}.finalTotal{font-size:18px;font-weight:600;white-space:nowrap}.finalNote{margin:2px 0 0;text-align:center;color:#858587;font-size:12px}.finalActions{position:absolute;top:var(--friends-top,733px);left:calc(50% - 154px);width:308px;transform:scale(var(--bill-scale,1));transform-origin:top center;display:flex;gap:12px}.finalAction{height:52px;border:0;border-radius:28px;background:#fff;color:#07070a;font:600 16px/19px "Inter",sans-serif;letter-spacing:-.24px;box-shadow:0 12px 30px rgba(0,0,0,.23)}.finalAction.view{width:151px}.finalAction.undo{width:145px;color:#ff4b43;background:rgba(255,255,255,.92)}.undoRing{display:inline-block;width:21px;height:21px;margin-right:7px;vertical-align:-5px;border:3px solid #ff4b43;border-radius:50%}.show-final.final-entering #finalScreen{animation:cardScreenIn 500ms cubic-bezier(.22,1,.36,1) both}.show-final.final-entering .successBadge{animation:successPop 550ms 100ms cubic-bezier(.18,1.35,.36,1) both}.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p{animation:finalRowIn 420ms 195ms cubic-bezier(.22,1,.36,1) both}.show-final.final-entering .finalRow{animation:finalRowIn 420ms cubic-bezier(.22,1,.36,1) both}.show-final.final-entering .finalRow:nth-child(1){animation-delay:255ms}.show-final.final-entering .finalRow:nth-child(2){animation-delay:310ms}.show-final.final-entering .finalRow:nth-child(3){animation-delay:365ms}.show-final.final-entering .finalRow:nth-child(4){animation-delay:420ms}.show-final.final-entering .finalNote{animation:finalRowIn 400ms 460ms cubic-bezier(.22,1,.36,1) both}.show-final.final-entering .finalActions{animation:peopleActionsIn 460ms 500ms cubic-bezier(.22,1,.36,1) both}
+.show-bill.bill-entering #billScreen{animation:cardScreenIn 500ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .billHero{animation:billHeroIn 560ms 105ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .billProgress{animation:billProgressIn 380ms 175ms cubic-bezier(.22,1,.36,1) both}
 .show-bill.bill-entering .billEyebrow{animation:billContentIn 430ms 180ms cubic-bezier(.22,1,.36,1) both}
@@ -110,6 +124,11 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .peopleActions{top:var(--people-actions-top,697px)}
 .assignPerson.is-target .assignPersonAvatar{box-shadow:0 0 22px rgba(182,255,147,.55);transform:scale(1.05)}
 .assignRow{transition:opacity .16s ease,transform .16s ease}.assignRow.assigned{opacity:0;transform:scale(.96)}
+.assignCTA{left:calc(50% - 145px);width:290px}
+@keyframes dropMagic{0%{transform:scale(1)}38%{transform:scale(1.15);box-shadow:0 0 28px rgba(178,255,142,.85)}100%{transform:scale(1);box-shadow:none}}
+.show-people.people-entering #peopleScreen,.show-assign.assign-entering #assignScreen{animation:cardScreenIn 460ms cubic-bezier(.22,1,.36,1) both}
+.show-people.people-entering .foodStrip{animation:foodStripIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}
+@media (prefers-reduced-motion:reduce){.show-final.final-entering #finalScreen,.show-final.final-entering .successBadge,.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p,.show-final.final-entering .finalRow,.show-final.final-entering .finalNote,.show-final.final-entering .finalActions{animation-duration:1ms!important;animation-delay:0ms!important}}
 @media (prefers-reduced-motion:reduce){.billGlow{animation:none}.show-bill.bill-entering #billScreen,.show-bill.bill-entering .billHero,.show-bill.bill-entering .billProgress,.show-bill.bill-entering .billEyebrow,.show-bill.bill-entering .billAmount,.show-bill.bill-entering .billMeta,.show-bill.bill-entering .billCount,.show-bill.bill-entering .billTax,.show-bill.bill-entering .billRow,.show-bill.bill-entering .billHint,.show-bill.bill-entering .friendsButton,.show-people.people-entering #peopleScreen,.show-people.people-entering .peopleHero,.show-people.people-entering .foodStrip,.show-people.people-entering .peopleSearch,.show-people.people-entering .profile,.show-people.people-entering .peopleActions{animation-duration:1ms!important;animation-delay:0ms!important}}
 @media (prefers-reduced-motion:reduce){.show-assign.assign-entering #assignScreen,.show-assign.assign-entering .assignHero,.show-assign.assign-entering .assignPeople,.show-assign.assign-entering .assignContent,.show-assign.assign-entering .assignCTA,.assignPerson.magic .assignPersonAvatar,.dragGhost.show{animation-duration:1ms!important;animation-delay:0ms!important}}
 </style>
@@ -258,6 +277,25 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
   <div id="dragGhost" class="dragGhost" aria-hidden="true"></div>
 </section>
 
+<section id="finalScreen" aria-label="Group created and requests sent">
+  <div class="billBackdrop"></div><div class="billGlow"></div>
+  <article class="finalPanel">
+    <header class="finalHero">
+      <div class="successBadge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12 4 4 8-8"/></svg></div>
+      <h2>Group Created<br>&amp; Request Sent</h2>
+      <p>SRI KAVERI MESS · 25 OCT 2026</p>
+    </header>
+    <div class="finalDetails" aria-label="Split summary">
+      <div class="finalRow"><span class="finalName">You</span><span class="finalFoods"><img src="assets/Masala%20dosa.png" alt="Masala dosa"><img src="assets/Coffee.png" alt="Filter coffee"></span><strong class="finalTotal">₹152.25</strong></div>
+      <div class="finalRow"><span class="finalName">Vishnu</span><span class="finalFoods"><img src="assets/podei%20dosa.png" alt="Podi dosa"><img src="assets/Coffee.png" alt="Filter coffee"></span><strong class="finalTotal">₹136.50</strong></div>
+      <div class="finalRow"><span class="finalName">Gokul</span><span class="finalFoods"><img src="assets/Parotta.png" alt="Parotta"></span><strong class="finalTotal">₹63.00</strong></div>
+      <div class="finalRow"><span class="finalName">Sanjay</span><span class="finalFoods"><img src="assets/Idli.png" alt="Idli"><img src="assets/Coffee.png" alt="Filter coffee"></span><strong class="finalTotal">₹99.75</strong></div>
+      <p class="finalNote">GST split in proportion</p>
+    </div>
+  </article>
+  <div class="finalActions"><button class="finalAction view" type="button">View Group</button><button class="finalAction undo" type="button"><span class="undoRing" aria-hidden="true"></span>Undo · 10s</button></div>
+</section>
+
 <div id="status"></div>
 <script>
 const video=document.getElementById('video');
@@ -274,6 +312,7 @@ const friendsButton=document.querySelector('.friendsButton');
 const splitCount=document.getElementById('splitCount');
 const splitEach=document.getElementById('splitEach');
 const splitByItem=document.querySelector('.peopleAction.primary');
+const assignCTA=document.querySelector('.assignCTA');
 const dragGhost=document.getElementById('dragGhost');
 let stream=null;
 let facingMode='environment';
@@ -383,22 +422,30 @@ function showDetected(){
 enable.onclick=()=>{permission.classList.remove('show');startCamera()};
 
 function showSection(step){
-  document.body.classList.remove('people-entering','assign-entering');
+  document.body.classList.remove('people-entering','assign-entering','final-entering');
   document.body.classList.add('show-bill');
   if(step===0){
     billScreen.classList.remove('billScreenLeaving');
     friendsButton.classList.remove('is-pressed');
-    document.body.classList.remove('show-people','show-assign');
+    document.body.classList.remove('show-people','show-assign','show-final');
     requestAnimationFrame(()=>document.body.classList.add('bill-entering'));
     return;
   }
   if(step===1){
     splitByItem.classList.remove('is-pressed');
-    document.body.classList.remove('show-assign');
+    document.body.classList.remove('show-assign','show-final');
     document.body.classList.add('show-people');
     requestAnimationFrame(()=>document.body.classList.add('people-entering'));
     return;
   }
+  if(step===3){
+    assignCTA.classList.remove('is-pressed');
+    document.body.classList.remove('show-people','show-assign');
+    document.body.classList.add('show-final');
+    requestAnimationFrame(()=>document.body.classList.add('final-entering'));
+    return;
+  }
+  document.body.classList.remove('show-final');
   document.body.classList.remove('show-people');
   document.body.classList.add('show-assign');
   requestAnimationFrame(()=>document.body.classList.add('assign-entering'));
@@ -431,6 +478,11 @@ document.querySelectorAll('.profile').forEach(profile=>{
 splitByItem.onclick=()=>{
   splitByItem.classList.add('is-pressed');
   setTimeout(()=>showSection(2),120);
+};
+
+assignCTA.onclick=()=>{
+  assignCTA.classList.add('is-pressed');
+  setTimeout(()=>showSection(3),140);
 };
 
 document.querySelectorAll('[data-progress]').forEach(control=>{
