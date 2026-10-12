@@ -57,6 +57,25 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .splitDismiss{width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#fff;font-size:16px;font-weight:400;line-height:1}
 @keyframes splitBillAppear{0%{opacity:0;transform:translate3d(-50%,12px,0) scale(.34,.76)}58%{opacity:1;transform:translate3d(-50%,-2px,0) scale(1.055,.96)}78%{transform:translate3d(-50%,1px,0) scale(.985,1.025)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
 @media (prefers-reduced-motion:reduce){#splitButton.show{animation-duration:1ms}}
+#scanning-overlay{position:absolute;inset:0;z-index:12;display:grid;place-items:center;padding:24px;pointer-events:none;opacity:0;visibility:hidden;transform:translate3d(0,0,0) scale(.9);transition:transform .5s cubic-bezier(.175,.885,.32,1.2),opacity .4s ease,visibility 0s cubic-bezier(.32,.72,0,1) .5s;will-change:transform,opacity}
+#scanning-overlay.is-scanning{opacity:1;visibility:visible;transform:translate3d(0,0,0) scale(1);transition:transform .5s cubic-bezier(.175,.885,.32,1.2),opacity .4s ease,visibility 0s cubic-bezier(.32,.72,0,1) 0s}
+.siri-pill-capsule{position:relative;width:min(286px,calc(100vw - 48px));min-height:128px;padding:20px 22px 18px;border:1px solid rgba(255,255,255,.15);border-radius:40px;background:rgba(10,10,10,.55);box-shadow:0 20px 40px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.2),-18px 0 38px rgba(255,123,0,.12),18px 0 42px rgba(0,246,255,.14);backdrop-filter:blur(25px) saturate(160%);-webkit-backdrop-filter:blur(25px) saturate(160%);overflow:hidden;transform:translateZ(0);will-change:transform,opacity}
+.siri-pill-capsule::before{content:"";position:absolute;inset:-45%;background:radial-gradient(circle at 30% 52%,rgba(255,123,0,.16),transparent 30%),radial-gradient(circle at 72% 48%,rgba(0,246,255,.18),transparent 32%);transform:translateZ(0);animation:siriAuraDrift 7s cubic-bezier(.32,.72,0,1) infinite alternate;will-change:transform;pointer-events:none}
+.siri-wave-wrapper{position:relative;height:62px;overflow:hidden;isolation:isolate;transform:translateZ(0);will-change:transform}
+.siri-wave{position:absolute;inset:0;width:100%;height:100%;overflow:visible;mix-blend-mode:screen;transform-origin:center;transform:translateZ(0);will-change:transform,opacity}
+.siri-wave path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.siri-wave.back{animation:siriWaveBack 7s cubic-bezier(.32,.72,0,1) infinite alternate}.siri-wave.back path{stroke:url(#siri-cool-gradient);stroke-width:11;filter:blur(3.5px);opacity:.82}
+.siri-wave.mid{animation:siriWaveMid 9s cubic-bezier(.175,.885,.32,1.275) infinite alternate-reverse}.siri-wave.mid path{stroke:url(#siri-warm-gradient);stroke-width:9;filter:blur(2.2px);opacity:.88}
+.siri-wave.front{animation:siriWaveFront 5s cubic-bezier(.32,.72,0,1) infinite alternate}.siri-wave.front path{stroke:url(#siri-front-gradient);stroke-width:4;filter:drop-shadow(0 0 7px rgba(255,255,255,.65));opacity:.96}
+.siri-wave.glow{animation:siriWaveGlow 11s cubic-bezier(.175,.885,.32,1.275) infinite alternate-reverse}.siri-wave.glow path{stroke:url(#siri-glow-gradient);stroke-width:16;filter:blur(7px);opacity:.35}
+.scanning-text{position:relative;margin-top:9px;color:rgba(255,255,255,.82);font:500 13px/18px "Inter",-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.2px;text-align:center;animation:scanningTextPulse 5s cubic-bezier(.32,.72,0,1) infinite alternate;transform:translateZ(0);will-change:transform,opacity}
+@keyframes siriWaveBack{0%{transform:translate3d(-7px,1px,0) scaleY(.72) skewX(-7deg)}55%{transform:translate3d(5px,-2px,0) scaleY(1.12) skewX(5deg)}100%{transform:translate3d(9px,2px,0) scaleY(.83) skewX(-3deg)}}
+@keyframes siriWaveMid{0%{transform:translate3d(8px,-1px,0) scaleY(.78) skewX(7deg)}48%{transform:translate3d(-4px,2px,0) scaleY(1.18) skewX(-6deg)}100%{transform:translate3d(-10px,-2px,0) scaleY(.9) skewX(4deg)}}
+@keyframes siriWaveFront{0%{transform:translate3d(-4px,0,0) scaleY(.82) skewX(-4deg)}47%{transform:translate3d(7px,1px,0) scaleY(1.08) skewX(6deg)}100%{transform:translate3d(2px,-1px,0) scaleY(.92) skewX(-5deg)}}
+@keyframes siriWaveGlow{0%{transform:translate3d(5px,1px,0) scaleY(.68) skewX(5deg)}50%{transform:translate3d(-7px,-1px,0) scaleY(1.22) skewX(-5deg)}100%{transform:translate3d(9px,2px,0) scaleY(.86) skewX(3deg)}}
+@keyframes siriAuraDrift{0%{transform:translate3d(-5%,1%,0) rotate(-3deg)}100%{transform:translate3d(5%,-1%,0) rotate(3deg)}}
+@keyframes scanningTextPulse{0%{opacity:.58;transform:translate3d(0,1px,0)}100%{opacity:1;transform:translate3d(0,-1px,0)}}
+@media (prefers-reduced-motion:reduce){#scanning-overlay,.siri-pill-capsule::before,.siri-wave,.scanning-text{animation:none!important;transition-duration:1ms!important}}
 #status{position:absolute;top:calc(env(safe-area-inset-top) + 15px);left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:16px;background:rgba(0,0,0,.55);font-size:11px;opacity:0;transition:.2s;z-index:20}
 #status.show{opacity:1}
 #permission{position:absolute;inset:0;background:#000;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:30}
@@ -208,6 +227,18 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
   </div>
 </div>
 
+<div id="scanning-overlay" role="status" aria-live="polite" aria-hidden="true">
+  <div class="siri-pill-capsule">
+    <div class="siri-wave-wrapper" aria-hidden="true">
+      <svg class="siri-wave glow" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-glow-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00f6ff"/><stop offset=".48" stop-color="#ff007f"/><stop offset="1" stop-color="#ff7b00"/></linearGradient></defs><path d="M-8 34 C18 5 40 57 67 30 S111 6 136 33 S178 58 201 28 S229 10 248 32"/></svg>
+      <svg class="siri-wave back" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-cool-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00f6ff"/><stop offset="1" stop-color="#4a00e0"/></linearGradient></defs><path d="M-8 31 C17 9 42 50 66 28 S108 10 132 32 S173 51 198 27 S228 13 248 30"/></svg>
+      <svg class="siri-wave mid" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-warm-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff007f"/><stop offset="1" stop-color="#ff7b00"/></linearGradient></defs><path d="M-8 35 C15 55 42 8 69 34 S110 54 137 29 S178 8 202 35 S230 51 248 30"/></svg>
+      <svg class="siri-wave front" viewBox="0 0 240 62" preserveAspectRatio="none"><defs><linearGradient id="siri-front-gradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7effff"/><stop offset=".45" stop-color="#e985ff"/><stop offset=".72" stop-color="#ff4f9a"/><stop offset="1" stop-color="#ffd37e"/></linearGradient></defs><path d="M-8 32 C19 19 38 44 64 31 S106 17 132 33 S177 45 200 29 S229 20 248 32"/></svg>
+    </div>
+    <div class="scanning-text">Reading bill data...</div>
+  </div>
+</div>
+
 <div id="processingOverlay" class="processingOverlay" aria-hidden="true">
   <div class="processingOrb" aria-hidden="true"><span class="processingCore"></span></div>
   <div class="processingLabel">Preparing your bill…</div>
@@ -327,6 +358,7 @@ const status=document.getElementById('status');
 const detectedTop=document.getElementById('detectedTop');
 const detectedTools=document.getElementById('detectedTools');
 const splitButton=document.getElementById('splitButton');
+const scanningOverlay=document.getElementById('scanning-overlay');
 const processingOverlay=document.getElementById('processingOverlay');
 const billCard=document.getElementById('billCard');
 const flipCamera=document.getElementById('flipCamera');
@@ -404,6 +436,17 @@ async function startCamera(){
 function stopReceiptDetection(){
   clearInterval(scanTimer);
   scanTimer=null;
+  stopScanningAnimation();
+}
+
+function startScanningAnimation(){
+  scanningOverlay.classList.add('is-scanning');
+  scanningOverlay.setAttribute('aria-hidden','false');
+}
+
+function stopScanningAnimation(){
+  scanningOverlay.classList.remove('is-scanning');
+  scanningOverlay.setAttribute('aria-hidden','true');
 }
 
 function isReceiptText(text){
@@ -422,6 +465,7 @@ async function scanForReceipt(){
     canvas.width=Math.max(1,Math.round(video.videoWidth*scale));
     canvas.height=Math.max(1,Math.round(video.videoHeight*scale));
     canvas.getContext('2d',{willReadFrequently:true}).drawImage(video,0,0,canvas.width,canvas.height);
+    startScanningAnimation();
     const result=await Tesseract.recognize(canvas,'eng',{logger:()=>{}});
     scanAttempts++;
     if(isReceiptText(result.data.text)){
@@ -432,6 +476,7 @@ async function scanForReceipt(){
   }catch(error){
     // Keep camera scanning available if OCR is temporarily unavailable.
   }finally{
+    stopScanningAnimation();
     scanInProgress=false;
     if(scanAttempts>=20)stopReceiptDetection();
   }
