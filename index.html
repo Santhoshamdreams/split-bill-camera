@@ -47,7 +47,7 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .modebar{height:48px;border-radius:25px;background:rgba(12,12,12,.72);padding:0 9px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .mode{padding:8px 18px;border-radius:21px;color:#9a9a9f;font-size:18px;letter-spacing:.2px}
 .mode.active{color:#d8c74a;background:rgba(48,48,48,.72)}
-#splitButton{display:none;position:absolute;top:69%;left:50%;width:min(26.76vw,114px);min-width:100px;height:29px;transform:translate(-50%,12px) scale(.78);border:0;border-radius:28px;background:#fff;color:#04060d;padding:6px 10px;box-shadow:0 6px 22px rgba(0,0,0,.24);align-items:center;justify-content:center;gap:8px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:400;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;-webkit-tap-highlight-color:transparent;will-change:transform,opacity}
+#splitButton{display:none;position:absolute;top:69%;left:50%;width:auto;min-width:132px;height:29px;transform:translate(-50%,12px) scale(.78);border:0;border-radius:28px;background:#fff;color:#04060d;padding:6px 14px;box-shadow:0 6px 22px rgba(0,0,0,.24);align-items:center;justify-content:center;gap:8px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:400;line-height:17px;letter-spacing:0;opacity:0;z-index:8;pointer-events:auto;-webkit-tap-highlight-color:transparent;will-change:transform,opacity}
 #splitButton.show{display:flex;animation:splitBillAppear 620ms cubic-bezier(.18,1.35,.36,1) forwards}
 #splitButton:active{transform:translate(-50%,0) scale(.93);filter:brightness(.94)}
 .splitIcon{width:14px;height:14px;flex:0 0 14px;display:block}
@@ -105,6 +105,11 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
 .billScreenLeaving .billHero,.billScreenLeaving .billDetails{animation:billSharedOut 180ms cubic-bezier(.4,0,1,1) both}
 .show-people.people-entering #peopleScreen{animation:peopleScreenIn 580ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .peopleHero{animation:peopleHeroIn 520ms 55ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .foodStrip{animation:peopleElementIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .peopleSearch{animation:peopleElementIn 400ms 240ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .profile{animation:peopleElementIn 410ms cubic-bezier(.22,1,.36,1) both}.show-people.people-entering .profile:nth-child(1){animation-delay:285ms}.show-people.people-entering .profile:nth-child(2){animation-delay:325ms}.show-people.people-entering .profile:nth-child(3){animation-delay:365ms}.show-people.people-entering .profile:nth-child(4){animation-delay:405ms}.show-people.people-entering .profile:nth-child(5){animation-delay:445ms}.show-people.people-entering .profile:nth-child(6){animation-delay:485ms}.show-people.people-entering .profile:nth-child(7){animation-delay:525ms}.show-people.people-entering .profile:nth-child(8){animation-delay:565ms}.show-people.people-entering .profile:nth-child(9){animation-delay:605ms}.show-people.people-entering .profile:nth-child(10){animation-delay:645ms}.show-people.people-entering .profile:nth-child(11){animation-delay:685ms}.show-people.people-entering .profile:nth-child(12){animation-delay:725ms}.show-people.people-entering .peopleActions{animation:peopleActionsIn 460ms 710ms cubic-bezier(.22,1,.36,1) both}
 .show-assign.assign-entering #assignScreen{animation:assignScreenIn 580ms cubic-bezier(.22,1,.36,1) both}.show-assign.assign-entering .assignHero,.show-assign.assign-entering .assignPeople,.show-assign.assign-entering .assignContent,.show-assign.assign-entering .assignCTA{animation:peopleElementIn 460ms cubic-bezier(.22,1,.36,1) both}.show-assign.assign-entering .assignPeople{animation-delay:120ms}.show-assign.assign-entering .assignContent{animation-delay:200ms}.show-assign.assign-entering .assignCTA{animation-delay:380ms}
+@keyframes foodStripIn{0%{opacity:0;transform:translateX(-50%) translateY(14px);filter:blur(3px)}100%{opacity:1;transform:translateX(-50%) translateY(0);filter:blur(0)}}
+.show-people.people-entering .foodStrip{animation:foodStripIn 420ms 175ms cubic-bezier(.22,1,.36,1) both}
+.peopleActions{top:var(--people-actions-top,697px)}
+.assignPerson.is-target .assignPersonAvatar{box-shadow:0 0 22px rgba(182,255,147,.55);transform:scale(1.05)}
+.assignRow{transition:opacity .16s ease,transform .16s ease}.assignRow.assigned{opacity:0;transform:scale(.96)}
 @media (prefers-reduced-motion:reduce){.billGlow{animation:none}.show-bill.bill-entering #billScreen,.show-bill.bill-entering .billHero,.show-bill.bill-entering .billProgress,.show-bill.bill-entering .billEyebrow,.show-bill.bill-entering .billAmount,.show-bill.bill-entering .billMeta,.show-bill.bill-entering .billCount,.show-bill.bill-entering .billTax,.show-bill.bill-entering .billRow,.show-bill.bill-entering .billHint,.show-bill.bill-entering .friendsButton,.show-people.people-entering #peopleScreen,.show-people.people-entering .peopleHero,.show-people.people-entering .foodStrip,.show-people.people-entering .peopleSearch,.show-people.people-entering .profile,.show-people.people-entering .peopleActions{animation-duration:1ms!important;animation-delay:0ms!important}}
 @media (prefers-reduced-motion:reduce){.show-assign.assign-entering #assignScreen,.show-assign.assign-entering .assignHero,.show-assign.assign-entering .assignPeople,.show-assign.assign-entering .assignContent,.show-assign.assign-entering .assignCTA,.assignPerson.magic .assignPersonAvatar,.dragGhost.show{animation-duration:1ms!important;animation-delay:0ms!important}}
 </style>
@@ -206,10 +211,10 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
     <div class="peopleContent">
       <div class="peopleSearch" aria-label="Search people"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Search People</span></div>
       <div class="profiles" aria-label="Select people to split with">
-        <button class="profile selected" type="button" aria-pressed="true" data-person="You"><span class="profileAvatar">Y<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">You</span></button>
-        <button class="profile selected" type="button" aria-pressed="true" data-person="Vishnu"><span class="profileAvatar">V<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Vishnu</span></button>
-        <button class="profile selected" type="button" aria-pressed="true" data-person="Gokul"><span class="profileAvatar">G<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Gokul</span></button>
-        <button class="profile selected" type="button" aria-pressed="true" data-person="Sanjay"><span class="profileAvatar">S<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Sanjay</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="You"><span class="profileAvatar">Y<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">You</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Vishnu"><span class="profileAvatar">V<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Vishnu</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Gokul"><span class="profileAvatar">G<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Gokul</span></button>
+        <button class="profile" type="button" aria-pressed="false" data-person="Sanjay"><span class="profileAvatar">S<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Sanjay</span></button>
         <button class="profile" type="button" aria-pressed="false" data-person="Mangal"><span class="profileAvatar">M<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Mangal</span></button>
         <button class="profile" type="button" aria-pressed="false" data-person="Balu"><span class="profileAvatar">B<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Balu</span></button>
         <button class="profile" type="button" aria-pressed="false" data-person="Praveen"><span class="profileAvatar">PA<span class="profileCheck"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span></span><span class="profileName">Praveen</span></button>
@@ -221,7 +226,7 @@ body{color:#fff;-webkit-user-select:none;user-select:none}
       </div>
     </div>
   </article>
-  <div class="peopleActions"><button class="peopleAction primary" type="button">Split by item</button><button class="peopleAction secondary" type="button"><span id="splitCount">4</span> Split evenly <span id="splitEach" class="splitEach">₹112.88 each</span></button></div>
+  <div class="peopleActions"><button class="peopleAction primary" type="button">Split by item</button><button class="peopleAction secondary" type="button"><span id="splitCount">0</span> Split evenly <span id="splitEach" class="splitEach">Select people</span></button></div>
 </section>
 
 <section id="assignScreen" aria-label="Assign bill items to people">
@@ -281,7 +286,7 @@ const receiptTerms=/\b(total|subtotal|grand\s*total|amount\s*due|balance\s*due|t
 const moneyAmount=/(?:₹|rs\.?|inr|\$|€|£)?\s*\d{1,6}(?:[,.]\d{2})\b/gi;
 
 function syncBillScale(){
-  const scale=Math.min(1,window.innerWidth/393);
+  const scale=Math.min(1,window.innerWidth/393,window.innerHeight/852);
   document.documentElement.style.setProperty('--bill-scale',String(scale));
   document.documentElement.style.setProperty('--bill-panel-top',`${93.5*scale}px`);
   const friendTop=Math.max(0,Math.min(733*scale,window.innerHeight-24-(52*scale)));
@@ -483,6 +488,7 @@ document.querySelectorAll('.assignRow').forEach(row=>{
       updateAssignedBadge(person);
       target.classList.add('magic');
       row.classList.add('assigned');
+      setTimeout(()=>row.remove(),180);
       setTimeout(()=>target.classList.remove('magic'),650);
     }
     clearDropTargets();
