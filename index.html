@@ -157,9 +157,7 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
 @keyframes finalRowIn{0%{opacity:0;transform:translate3d(0,14px,0) scale(.94,.98);filter:blur(3px)}58%{opacity:1;transform:translate3d(0,-2px,0) scale(1.018,.988);filter:blur(0)}78%{transform:translate3d(0,1px,0) scale(.993,1.008)}100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
 @keyframes foodStripIn{0%{opacity:0;transform:translate3d(-50%,14px,0) scale(.9,.96)}58%{opacity:1;transform:translate3d(-50%,-2px,0) scale(1.025,.985)}78%{transform:translate3d(-50%,1px,0) scale(.992,1.01)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
 @keyframes peopleActionsIn{0%{opacity:0;transform:translate3d(0,18px,0) scale(calc(var(--bill-scale,1) * .9),calc(var(--bill-scale,1) * .96))}58%{opacity:1;transform:translate3d(0,-2px,0) scale(calc(var(--bill-scale,1) * 1.025),calc(var(--bill-scale,1) * .99))}78%{transform:translate3d(0,1px,0) scale(calc(var(--bill-scale,1) * .992),calc(var(--bill-scale,1) * 1.008))}100%{opacity:1;transform:translate3d(0,0,0) scale(var(--bill-scale,1))}}
-.control,#detectedTop,.side,.modebar,#status,.billPanel,.peoplePanel,.assignPanel,.finalPanel,.billCount,.billRow,.foodStrip,.peopleSearch,.profileAvatar,.assignPersonAvatar,.assignRow,.dragGhost,.assignEmptyIcon,.finalRow,.peopleAction.secondary,.processingIsland,#permission .card,#fallbackCamera .card{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);box-shadow:inset 1px 1px 1px rgba(255,255,255,.4),0 25px 40px rgba(0,0,0,.2);backdrop-filter:blur(40px) saturate(250%) contrast(110%);-webkit-backdrop-filter:blur(40px) saturate(250%) contrast(110%);will-change:transform,opacity,backdrop-filter;backface-visibility:hidden}
 .processingOverlay{background:rgba(255,255,255,.08);backdrop-filter:blur(40px) saturate(250%) contrast(110%);-webkit-backdrop-filter:blur(40px) saturate(250%) contrast(110%);will-change:transform,opacity,backdrop-filter;transform:translate3d(0,0,0)}
-.billHero,.peopleHero,.assignHero,.finalHero{box-shadow:inset 1px 1px 1px rgba(255,255,255,.4),0 25px 40px rgba(0,0,0,.2);backdrop-filter:blur(40px) saturate(250%) contrast(110%);-webkit-backdrop-filter:blur(40px) saturate(250%) contrast(110%);will-change:transform,opacity,backdrop-filter,clip-path;transform:translate3d(0,0,0)}
 #splitButton.show.is-pressed{transform:translate3d(-50%,4px,0) scale(.9);transition:transform 70ms cubic-bezier(.34,1.56,.64,1),background-color 70ms cubic-bezier(.34,1.56,.64,1)}
 #splitButton.show.is-releasing{transform:translate3d(-50%,0,0) scale(1);transition:transform 560ms cubic-bezier(.34,1.56,.64,1),background-color 420ms cubic-bezier(.175,.885,.32,1.275)}
 .liquid-touch{touch-action:manipulation;will-change:transform,opacity,backdrop-filter;transition:transform 560ms cubic-bezier(.34,1.56,.64,1),filter 420ms cubic-bezier(.175,.885,.32,1.275);transform:translate3d(0,0,0)}
@@ -174,6 +172,13 @@ html,body,#app{min-height:100%;height:100dvh}#app{position:fixed;inset:0;width:1
 @keyframes billContentIn{0%{opacity:0;transform:translate3d(0,15px,0) scale(.89,.96);filter:blur(3px);clip-path:inset(18% 10% round 24px)}62%{opacity:1;transform:translate3d(0,-3px,0) scale(1.04,.976);filter:blur(0);clip-path:inset(0 round 14px)}82%{transform:translate3d(0,2px,0) scale(.986,1.016)}100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0);clip-path:inset(0 round 0)}}
 @keyframes billRowIn{0%{opacity:0;transform:translate3d(0,17px,0) scale(.86,.94);clip-path:inset(18% 12% round 26px)}58%{opacity:1;transform:translate3d(0,-3px,0) scale(1.045,.97);clip-path:inset(0 round 20px)}78%{transform:translate3d(0,2px,0) scale(.982,1.022)}100%{opacity:1;transform:translate3d(0,0,0) scale(1);clip-path:inset(0 round 20px)}}
 @keyframes finalRowIn{0%{opacity:0;transform:translate3d(0,16px,0) scale(.87,.95);filter:blur(3px);clip-path:inset(18% 12% round 28px)}58%{opacity:1;transform:translate3d(0,-3px,0) scale(1.042,.972);filter:blur(0);clip-path:inset(0 round 20px)}80%{transform:translate3d(0,2px,0) scale(.984,1.018)}100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0);clip-path:inset(0 round 20px)}}
+.peoplePanel,.assignPanel{overflow:visible}.profiles,.profile,.profileAvatar,.assignPeople,.assignPerson,.assignPersonAvatar{overflow:visible}.profileAvatar,.assignPersonAvatar{filter:drop-shadow(0 10px 18px rgba(0,0,0,.24));will-change:transform,filter}.profile.selected .profileAvatar,.assignPerson.magic .assignPersonAvatar{filter:drop-shadow(0 12px 24px rgba(181,255,146,.42))}
+.finalHero{height:310px;position:relative}.successLottie{width:220px;height:220px;margin:0 auto}.finalHero h2{margin-top:-12px}.finalHero p{margin-top:10px}
+.billGlow::before,.billGlow::after{content:"";position:absolute;pointer-events:none;border-radius:50%;mix-blend-mode:screen;will-change:transform,opacity,filter;transform:translate3d(0,0,0)}
+.billGlow::before{left:12%;top:18%;width:68%;height:58%;background:radial-gradient(ellipse at center,rgba(255,185,125,.22),rgba(192,89,255,.18) 38%,transparent 70%);filter:blur(34px);animation:ambientWaterGlow 4.7s cubic-bezier(.34,1.56,.64,1) infinite alternate}
+.billGlow::after{left:50%;top:50%;width:58%;height:46%;background:radial-gradient(ellipse at center,rgba(127,218,255,.48),rgba(193,83,255,.32) 42%,rgba(255,108,169,.16) 62%,transparent 76%);filter:blur(28px);opacity:.72;transform:translate3d(calc(-50% + var(--touch-glow-x,0px)),calc(-50% + var(--touch-glow-y,0px)),0) scale(var(--touch-glow-scale,1));transition:transform 900ms cubic-bezier(.34,1.56,.64,1),opacity 700ms cubic-bezier(.175,.885,.32,1.275)}
+.glow-touching .billGlow::after{opacity:1;transition:transform 120ms cubic-bezier(.175,.885,.32,1.275),opacity 120ms cubic-bezier(.34,1.56,.64,1)}
+@keyframes ambientWaterGlow{0%{opacity:.52;transform:translate3d(-6%,-4%,0) scale(.9,.96) rotate(-3deg)}48%{opacity:.84;transform:translate3d(5%,2%,0) scale(1.08,.94) rotate(2deg)}100%{opacity:.64;transform:translate3d(-2%,6%,0) scale(.96,1.1) rotate(-1deg)}}
 .show-people.people-entering #peopleScreen,.show-assign.assign-entering #assignScreen{animation:cardScreenIn 460ms cubic-bezier(.34,1.56,.64,1) both}
 .show-people.people-entering .foodStrip{animation:foodStripIn 420ms 175ms cubic-bezier(.34,1.56,.64,1) both}
 @media (prefers-reduced-motion:reduce){.show-final.final-entering #finalScreen,.show-final.final-entering .successBadge,.show-final.final-entering .finalHero h2,.show-final.final-entering .finalHero p,.show-final.final-entering .finalRow,.show-final.final-entering .finalNote,.show-final.final-entering .finalActions{animation-duration:1ms!important;animation-delay:0ms!important}}
@@ -612,6 +617,41 @@ function bindLiquidTouch(element){
 }
 
 document.querySelectorAll('button:not(#splitButton),.profile,.billRow,.assignRow,.progressControl,.shutter').forEach(bindLiquidTouch);
+
+function moveBackgroundGlow(touch){
+  const x=((touch.clientX/window.innerWidth)-.5)*76;
+  const y=((touch.clientY/window.innerHeight)-.5)*104;
+  const distance=Math.min(1,Math.hypot(x/38,y/52));
+  document.documentElement.style.setProperty('--touch-glow-x',`${x.toFixed(1)}px`);
+  document.documentElement.style.setProperty('--touch-glow-y',`${y.toFixed(1)}px`);
+  document.documentElement.style.setProperty('--touch-glow-scale',String(1+(distance*.12)));
+}
+
+function releaseBackgroundGlow(){
+  document.body.classList.remove('glow-touching');
+  document.documentElement.style.setProperty('--touch-glow-x','0px');
+  document.documentElement.style.setProperty('--touch-glow-y','0px');
+  document.documentElement.style.setProperty('--touch-glow-scale','1');
+}
+
+document.addEventListener('touchstart',event=>{
+  const touch=event.touches[0];
+  if(!touch)return;
+  document.body.classList.add('glow-touching');
+  moveBackgroundGlow(touch);
+},{passive:true});
+
+document.addEventListener('touchmove',event=>{
+  const touch=event.touches[0];
+  if(touch)moveBackgroundGlow(touch);
+},{passive:true});
+
+document.addEventListener('touchend',event=>{
+  if(event.touches.length)moveBackgroundGlow(event.touches[0]);
+  else releaseBackgroundGlow();
+},{passive:true});
+
+document.addEventListener('touchcancel',releaseBackgroundGlow,{passive:true});
 
 splitButton.addEventListener('keydown',event=>{
   if(event.key!=='Enter'&&event.key!==' ')return;
